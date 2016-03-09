@@ -1,0 +1,102 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin:0px;
+  padding: 0px;
+}
+
+.header
+{
+	background: #273B47;
+	height: 5em;
+	color: white;
+	padding-top:0px;
+}
+.navbar-brand {
+
+    padding-left: 1em;
+    padding:0px;
+
+}
+
+.navbar-default .navbar-brand {
+   padding-left: 1em;
+}
+.Imagcoment {
+    width: 50px;
+}
+
+.navbar-default
+{
+	background: #273B47;
+	border-color: #273B47;
+	color: white;
+
+}
+.navbar {
+border-radius: 0px;
+margin-bottom: 0px;
+width: 100%; /* hacemos que la cabecera ocupe el ancho completo de la página */
+left: 0; /* Posicionamos la cabecera al lado izquierdo */
+top: 0; /* Posicionamos la cabecera pegada arriba */
+position: fixed; /* Hacemos que la cabecera tenga una posición fija */
+z-index: 1001;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+	font-weight: bold;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: white;
+    font-weight: bold;
+    border-bottom: 3px solid #00A1E0;
+}
+.navbar-nav {
+    padding-right: 2em;
+}
+.navbar-nav>li>a {
+     padding-top: 11px; 
+    padding-bottom: 15px;
+}
+
+.col-xs-3
+{
+	padding-top: 0px;
+}
+
+.panel
+{
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+	padding: 2em;
+	border: 0px;
+	border-radius: 0px;
+
+}
+
+.panel:hover
+{
+	transition:box-shadow .25s;
+	box-shadow:0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)
+}
+.titlelogin
+{
+		font-weight: bold;
+
+}
+.borde
+{
+	border-bottom: 1px solid #F2F2F2;
+}
+.spaner
+{
+	color:#00A1E0;
+
+}
+.margin
+{
+	margin-top: 8em;
+}
+
+
+

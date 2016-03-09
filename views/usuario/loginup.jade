@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+   div(class="container")
+
+      div(class="row margin")
+         
+         div(class="col-sm-3 col-md-4")
+         div(class="col-sm-6 col-md-4")
+            div(class="panel")
+               div(class="titulologin text-center")
+                  h3(class="titlelogin") New-
+                    span(class="spaner") User
+                  div(class="borde")
+                  <br>
+                  <br>
+               form(action='/login/save' method='post')
+                   div(class="form-group")
+                      input(name="nombre" type="text" class="form-control" placeholder="Name")
+                      <br>
+                      input(name="apellido" type="text" class="form-control" placeholder="Lasname")
+                      <br>
+                      input(name="usuario" type="text" class="form-control" placeholder="Username")
+                      <br>
+                      input(name="pasword" type="password" class="form-control" placeholder="Passworduser")
+                      <br>
+                      input(name="rpasword" type="password" class="form-control" placeholder="Repeat Password")
+                      <br>
+                      <br>
+                      div(class="form-group")
+                         button(type="submit" class="btn btn-primary btn-group-justified")
+                            <span class="glyphicon glyphicon-ok"></span> Create
+
+                         button(class="btn btn-danger btn-group-justified")
+                            <span class="glyphicon glyphicon-remove"></span> Cancel
+         div(class="col-sm-3 col-md-4")

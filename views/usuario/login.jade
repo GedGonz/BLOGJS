@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+   div(class="container")
+
+      div(class="row margin")
+         
+         div(class="col-sm-3 col-md-4")
+         div(class="col-sm-6 col-md-4")
+            div(class="panel")
+               div(class="titulologin text-center")
+                  h3(class="titlelogin") LOGIN-
+                    span(class="spaner") BLOG
+                  div(class="borde")
+                  <br>
+                  <br>
+               form(method="post" action="/login/count")
+                  div(class="form-group")
+                     input(name="user" type="text" class="form-control" placeholder="Username")
+                     <br>
+                     input(name="pasword" type="password" class="form-control" placeholder="Password")
+                  <br>
+                  <br>
+                  div(class="form-group")
+                     button( class="btn btn-primary btn-group-justified")
+                        <span class="glyphicon glyphicon-ok"></span> Login 
+                     br
+                     a(href="/") register
+         div(class="col-sm-3 col-md-4")

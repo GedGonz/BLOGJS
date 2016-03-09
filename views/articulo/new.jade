@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+    script(src="../tinymce/tinymce.min.js")
+    script
+       |tinymce.init({
+       |selector: 'textarea',
+       |height: 200,
+       |theme: 'modern'
+       | });
+    div(class="container")
+
+      div(class="row margin")
+         
+         div(class="col-sm-3 col-md-1")
+         div(class="col-sm-6 col-md-10")
+               form(action='/login/save' method='post')
+                   div(class="form-group")
+                     div(class="row")
+                         div(class="col-md-6")
+                             input(name="Titulo" type="text" class="form-control" placeholder="Titulo")
+                             br
+                             input(name="Autor" type="text" class="form-control" placeholder="Autor")
+                     br
+                     div(class="row")
+                         div(class="col-md-12")
+                             input(name="Descripcion" type="text" class="form-control" placeholder="Descripcion")
+                     br
+                     label Cuerpo
+                     hr
+                     textarea(name="cuerpo"  class="form-control" placeholder="Cuerpo")
+                      
+                     br
+                     br
+                     div(class="form-group text-right")
+                         button(type="submit" class="btn btn-primary ")
+                            <span class="glyphicon glyphicon-ok"></span> Create
+
+                         button(class="btn btn-danger")
+                            <span class="glyphicon glyphicon-remove"></span> Cancel
+         div(class="col-sm-3 col-md-1")
+
+      

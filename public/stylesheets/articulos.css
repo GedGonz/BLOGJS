@@ -1,0 +1,78 @@
+.Imagarticulo
+{
+	height: auto;
+	min-height:100%;
+	width: 100%; 
+	max-height: 600px;
+	min-height: 100%;
+        opacity: 0.8;
+}
+.imagautor
+{
+ width: 50px;
+ border-radius: 50%;
+}
+.fontparr
+{
+	font-family: 'Crimson Text', serif;
+	font-size: 1.5em;
+	color: #515151
+}
+.date
+{
+	font-family: 'Crimson Text', serif;
+	font-size: 1.2em;
+	color: #515151
+}
+.fonttitle
+{
+	font-family: 'Lato', sans-serif;
+	font-weight: bold;
+	font-size: 2.2em;
+	color: #515151
+}
+
+.postimage
+{
+	background-color: #191919;
+    position: relative;
+    margin-top: 3.7em;
+
+}
+
+.posttitle
+{
+    padding: 0 1em;
+    border-bottom: 0 none;
+    bottom: 0.7em;
+    color: #fff;
+    font-weight:bold;
+    font-size: 3em;
+    margin: 0 auto;
+    padding: 0 8.1em;
+    padding-bottom: 2em;
+    position: absolute;
+    text-shadow: rgba(0,0,0,0.8) 0px 1px 1px;
+    text-rendering: auto;
+    -webkit-font-smoothing: auto;
+
+}
+
+@media (max-width: 992px){
+.imagautor
+{
+ max-width: 20%;
+}
+}
+
+@media (max-width: 500px){
+	.posttitle {
+    max-width: 90%;
+    padding: 0 1em;
+    font-size: 3rem;
+}
+.imagautor
+{
+ max-width: 20%;
+}
+}
