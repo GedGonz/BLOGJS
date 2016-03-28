@@ -57,6 +57,10 @@ html
                 span(class="icon-bar")
 
         div(class="collapse navbar-collapse navbar-ex1-collapse")
+            if valse
+               ul(class="nav navbar-nav navbar-center")
+                   li
+                    p(class="nameuser") #{User[0].Nombre+" "+User[0].Apellido}          
             ul(class="nav navbar-nav navbar-right")
                 li
                  a(href="/" class="link1") Home

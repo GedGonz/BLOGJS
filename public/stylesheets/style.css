@@ -119,3 +119,12 @@ z-index: 1001;
 {
   margin-right: 0.2em;
 }
+
+.nameuser{
+  color: white;
+  font-weight: bold;
+  padding-top: 11px;
+  padding-left: 5em;
+  line-height: 20px;
+  display: block;
+}

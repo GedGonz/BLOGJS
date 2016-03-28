@@ -14,7 +14,10 @@ router.get('/', function(req, res, next) {
       if(sessions)
       {
         shemarticulo.Articulo.find({Usuario:sessions},function(err,Art) {
-           res.render('articulo/listall', { title: 'BlogJS',Articulos:Art,valse:sessions  });
+          shemauser.Usuario.find({_id:sessions},function(err,User){
+            res.render('articulo/listall', { title: 'BlogJS',Articulos:Art,valse:sessions,User:User});
+          });
+           
         });
       }
       else
@@ -29,7 +32,9 @@ router.get('/', function(req, res, next) {
 //Ruta de Login
 router.get('/login', function(req, res, next) {
   var sessions=req.session.iduser;
-  res.render('usuario/login', { title: 'BlogJS',valse:sessions  });
+          shemauser.Usuario.find({_id:sessions},function(err,User){
+            res.render('usuario/login', { title: 'BlogJS',valse:sessions,User:User});
+          });
 });
 
 //Ruta de Logout
@@ -40,8 +45,8 @@ router.get('/logouts', function(req, res, next) {
     console.log(err);
   } else {
       shemarticulo.Articulo.find(function(err,Art) {
+            res.render('usuario/login', { title: 'BlogJS',Articulos:Art});
 
-    res.render('usuario/login', { title: 'BlogJS',Articulos:Art});
      });
   }
 });
@@ -65,16 +70,25 @@ router.post('/login/count', function(req, res, next) {
       {
        
       shemarticulo.Articulo.find({Usuario:iduser},function(err,Art) {
-         res.render('articulo/listall', { title: 'BlogJS',Articulos:Art,valse:sessions  });
+        shemauser.Usuario.find({_id:iduser},function(err,User){
+
+            res.render('articulo/listall', { title: 'BlogJS',Articulos:Art,valse:sessions,User:User});
+          });
       });
      	 
       }
       else
        {
-       res.render('/', { title: 'BlogJS',valse:sessions });
+          shemauser.Usuario.find({_id:iduser},function(err,User){
+            res.render('/', { title: 'BlogJS',Articulos:Art,valse:sessions,User:User});
+          });
        }
      }
-     else{res.render('usuario/login', { title: 'BlogJS',valse:sessions });}
+     else{
+          shemauser.Usuario.find({_id:sessions},function(err,User){
+            res.render('usuario/login', { title: 'BlogJS',Articulos:Art,valse:sessions,User:User});
+          });
+         }
 
   });
  
@@ -84,7 +98,10 @@ router.post('/login/count', function(req, res, next) {
 //Ruta de LoginUp
 router.get('/login/new', function(req, res, next) {
   var sessions=req.session.iduser; 
-  res.render('usuario/loginup', { title: 'BlogJS',valse:sessions });
+    shemauser.Usuario.find({_id:sessions},function(err,User){
+    res.render('usuario/loginup', { title: 'BlogJS',valse:sessions,User:User});
+  });
+
 });
 
 router.post('/login/save', function(req, res, next) {
@@ -105,11 +122,15 @@ var sessions=req.session.iduser;
   	if(!err)
   	{
 		console.log(Usariodata);
-  		res.render('usuario/login', { title: 'BlogJS',valse:sessions });
+     shemauser.Usuario.find({_id:sessions},function(err,User){
+       res.render('usuario/login', { title: 'BlogJS',valse:sessions,User:User});
+     });
   	}
   	else
   	{
-  		res.render('usuario/loginup', { title: 'BlogJS',valse:sessions });
+     shemauser.Usuario.find({_id:sessions},function(err,User){
+       res.render('usuario/loginup', { title: 'BlogJS',valse:sessions,User:User});
+     });
   	}
   		
   });
@@ -128,7 +149,10 @@ router.get('/articulo/design/:id', function(req, res, next) {
   shemacoment.Comentario.find({Articulo:req.params.id},function(err,coment) {
 
     var datahtml=iterahtml(coment);
-    res.render('articulo/design1', { Articulo: Art, comentarios: datahtml,valse:sessions});
+      shemauser.Usuario.find({_id:sessions},function(err,User){
+       res.render('articulo/design1', { title: 'BlogJS',Articulo: Art,comentarios: datahtml,valse:sessions,User:User});
+     });
+
     html="";
    });
 
@@ -251,12 +275,16 @@ router.post('/articulo/:id/coment/save/:padre/:tipo', function(req, res, next) {
        console.log(Comentdata);
         if(!err)
         {
-          
-          res.render('articulo/design1/req.params.id', {title: 'BlogJS',valse:sessions});
+           shemauser.Usuario.find({_id:sessions},function(err,User){
+           res.render('articulo/design1/req.params.id', { title: 'BlogJS',valse:sessions,User:User});
+           });
+
         }
         else
         {
-          res.render('welcome/index', { title: 'BlogJS',valse:sessions });
+           shemauser.Usuario.find({_id:sessions},function(err,User){
+            res.render('welcome/index', { title: 'BlogJS',valse:sessions,User:User});
+           });
         }
     });
 
@@ -272,11 +300,16 @@ router.get('/articulo/new', function(req, res, next) {
   var sessions=req.session.iduser; 
   if(req.session.iduser)
   {
-    res.render('articulo/new', { title: 'BlogJS',valse:sessions });
+    shemauser.Usuario.find({_id:sessions},function(err,User){
+      res.render('articulo/new', { title: 'BlogJS',valse:sessions,User:User});
+     });
+
   }
   else
   {
-     res.render('usuario/login',{valse:sessions});
+     shemauser.Usuario.find({_id:sessions},function(err,User){
+      res.render('usuario/login', { title: 'BlogJS',valse:sessions,User:User});
+     });
   }
   
 });
@@ -307,11 +340,16 @@ router.post('/articulo/save', function(req, res, next) {
   	if(!err)
   	{
 		console.log(Articulodata);
-  		res.render('articulo/new', { title: 'BlogJS',valse:idusuario });
+         shemauser.Usuario.find({_id:sessions},function(err,User){
+      res.render('articulo/new', { title: 'BlogJS',valse:sessions,User:User});
+     });
+
   	}
   	else
   	{
-  		res.render('welcome/index', { title: 'BlogJS',valse:idusuario });
+           shemauser.Usuario.find({_id:sessions},function(err,User){
+      res.render('welcome/index', { title: 'BlogJS',valse:sessions,User:User});
+     });
   	}
   		
   });
