@@ -7,21 +7,51 @@ var html="";
 var value="";
 var datacoments="";
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
+      var sessions=req.session.iduser;
+      if(sessions)
+      {
+        shemarticulo.Articulo.find({Usuario:sessions},function(err,Art) {
+           res.render('articulo/listall', { title: 'BlogJS',Articulos:Art,valse:sessions  });
+        });
+      }
+      else
+      {
+        shemarticulo.Articulo.find(function(err,Art) {
 
-
-  res.render('welcome/index', { title: 'BlogJS' });
+         res.render('welcome/index', { title: 'BlogJS',Articulos:Art,valse:sessions});
+        });
+      }
 });
 
 //Ruta de Login
 router.get('/login', function(req, res, next) {
-  res.render('usuario/login', { title: 'BlogJS' });
+  var sessions=req.session.iduser;
+  res.render('usuario/login', { title: 'BlogJS',valse:sessions  });
+});
+
+//Ruta de Logout
+router.get('/logouts', function(req, res, next) {
+
+  req.session.destroy(function(err) {
+  if(err) {
+    console.log(err);
+  } else {
+      shemarticulo.Articulo.find(function(err,Art) {
+
+    res.render('usuario/login', { title: 'BlogJS',Articulos:Art});
+     });
+  }
+});
+
+ 
 });
 
 //Logeando usuario
 router.post('/login/count', function(req, res, next) {
-
+ var sessions=req.session.iduser;
 
   shemauser.Usuario.find({Usuario:req.body.user,Password:req.body.pasword},function(err,usuario) {
      if(usuario.length!=0)
@@ -29,21 +59,22 @@ router.post('/login/count', function(req, res, next) {
 
      	//console.log(usuario);
      req.session.iduser=usuario[0]._id;
+     var sessions=req.session.iduser; 
      var iduser=req.session.iduser;
      if(iduser)
       {
        
       shemarticulo.Articulo.find({Usuario:iduser},function(err,Art) {
-         res.render('articulo/listall', { title: 'BlogJS',Articulos:Art });
+         res.render('articulo/listall', { title: 'BlogJS',Articulos:Art,valse:sessions  });
       });
      	 
       }
       else
        {
-       res.render('/', { title: 'BlogJS' });
+       res.render('/', { title: 'BlogJS',valse:sessions });
        }
      }
-     else{res.render('usuario/login', { title: 'BlogJS' });}
+     else{res.render('usuario/login', { title: 'BlogJS',valse:sessions });}
 
   });
  
@@ -52,11 +83,12 @@ router.post('/login/count', function(req, res, next) {
 
 //Ruta de LoginUp
 router.get('/login/new', function(req, res, next) {
-  res.render('usuario/loginup', { title: 'BlogJS' });
+  var sessions=req.session.iduser; 
+  res.render('usuario/loginup', { title: 'BlogJS',valse:sessions });
 });
 
 router.post('/login/save', function(req, res, next) {
-
+var sessions=req.session.iduser; 
 
   var data={
 	Nombre:req.body.nombre,
@@ -73,11 +105,11 @@ router.post('/login/save', function(req, res, next) {
   	if(!err)
   	{
 		console.log(Usariodata);
-  		res.render('usuario/login', { title: 'BlogJS' });
+  		res.render('usuario/login', { title: 'BlogJS',valse:sessions });
   	}
   	else
   	{
-  		res.render('usuario/loginup', { title: 'BlogJS' });
+  		res.render('usuario/loginup', { title: 'BlogJS',valse:sessions });
   	}
   		
   });
@@ -88,7 +120,7 @@ router.post('/login/save', function(req, res, next) {
 
 //Find by id Articulo
 router.get('/articulo/design/:id', function(req, res, next) {
-  
+  var sessions=req.session.iduser; 
 	 //console.log(req.params.id);
    //var html=html();
 	shemarticulo.Articulo.find({_id:req.params.id},function(err,Art) {
@@ -96,7 +128,7 @@ router.get('/articulo/design/:id', function(req, res, next) {
   shemacoment.Comentario.find({Articulo:req.params.id},function(err,coment) {
 
     var datahtml=iterahtml(coment);
-    res.render('articulo/design1', { Articulo: Art, comentarios: datahtml});
+    res.render('articulo/design1', { Articulo: Art, comentarios: datahtml,valse:sessions});
     html="";
    });
 
@@ -195,7 +227,7 @@ router.get('/articulo/design/:id', function(req, res, next) {
 //save coment
 router.post('/articulo/:id/coment/save/:padre/:tipo', function(req, res, next) {
 
-   
+    var sessions=req.session.iduser; 
     var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
     var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
     var f=new Date();
@@ -220,11 +252,11 @@ router.post('/articulo/:id/coment/save/:padre/:tipo', function(req, res, next) {
         if(!err)
         {
           
-          res.render('articulo/design1', {title: 'BlogJS'});
+          res.render('articulo/design1/req.params.id', {title: 'BlogJS',valse:sessions});
         }
         else
         {
-          res.render('welcome/index', { title: 'BlogJS' });
+          res.render('welcome/index', { title: 'BlogJS',valse:sessions });
         }
     });
 
@@ -237,13 +269,14 @@ router.post('/articulo/:id/coment/save/:padre/:tipo', function(req, res, next) {
 
 //New Articulo
 router.get('/articulo/new', function(req, res, next) {
+  var sessions=req.session.iduser; 
   if(req.session.iduser)
   {
-    res.render('articulo/new', { title: 'BlogJS', title: 'BlogJS' });
+    res.render('articulo/new', { title: 'BlogJS',valse:sessions });
   }
   else
   {
-     res.render('usuario/login');
+     res.render('usuario/login',{valse:sessions});
   }
   
 });
@@ -260,7 +293,7 @@ router.post('/articulo/save', function(req, res, next) {
   	Autor:req.body.Autor,
   	Descripcion:req.body.Descripcion,
   	Cuerpo:req.body.Cuerpo.replace(new RegExp('\n','g'), '<br />').replace(new RegExp('\r','g'), ''),
-  	Date:fecha,
+  	Fecha:fecha,
   	Portada:"Portada.png",
   	Usuario:idusuario
   }
@@ -274,11 +307,11 @@ router.post('/articulo/save', function(req, res, next) {
   	if(!err)
   	{
 		console.log(Articulodata);
-  		res.render('articulo/new', { title: 'BlogJS' });
+  		res.render('articulo/new', { title: 'BlogJS',valse:idusuario });
   	}
   	else
   	{
-  		res.render('welcome/index', { title: 'BlogJS' });
+  		res.render('welcome/index', { title: 'BlogJS',valse:idusuario });
   	}
   		
   });

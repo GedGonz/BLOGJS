@@ -8,7 +8,7 @@ var Usuario = mongoose.model('Usuario');
   	Autor:String,
   	Descripcion:String,
   	Cuerpo:String,
-  	Date:String,
+  	Fecha:String,
   	Portada:String,
   	Usuario: { type: Schema.ObjectId, ref: "Usuario" } 
 

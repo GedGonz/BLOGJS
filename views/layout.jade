@@ -60,12 +60,25 @@ html
             ul(class="nav navbar-nav navbar-right")
                 li
                  a(href="/" class="link1") Home
-                li
-                 a(href="/login/new" class="link2") Registrarse
-                li
-                 a(href="#" class="link3") Contacto
-                li
-                 a(href="/login" class="link4") Login
+
+                if !valse
+                    li
+                     a(href="#" class="link3") Contacto
+                    li
+                     a(href="#" class="link3") About
+                    li
+                     a(href="/login/new" class="link2") Registrarse
+                    li
+                     a(href="/login" class="link4") Login
+                else
+                    li
+                     a(href="/articulo/new" class="link4") Articulo
+                    li
+                     a(href="/logouts" class="link4") Logout
+
+
+              
+
 
   body
      block content
