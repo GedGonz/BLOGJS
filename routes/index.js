@@ -148,8 +148,9 @@ router.get('/articulo/design/:id', function(req, res, next) {
 
   shemacoment.Comentario.find({Articulo:req.params.id},function(err,coment) {
 
-    var datahtml=iterahtml(coment);
+    
       shemauser.Usuario.find({_id:sessions},function(err,User){
+        var datahtml=iterahtml(coment,User,req);
        res.render('articulo/design1', { title: 'BlogJS',Articulo: Art,comentarios: datahtml,valse:sessions,User:User});
      });
 
@@ -164,7 +165,7 @@ router.get('/articulo/design/:id', function(req, res, next) {
 });
 
 
-   var iterahtml= function (Comentarios)
+   var iterahtml= function (Comentarios,Usarios,request)
    {
     
     Comentarios.forEach(function(com) {
@@ -201,7 +202,16 @@ router.get('/articulo/design/:id', function(req, res, next) {
       html=html+"<form (action='/articulo/#{Articulo[0]._id}/coment/save/0/0' method='post')>";
       html=html+"<div class='col-md-12'>";
       html=html+"<div class='form-group'>";
-      html=html+"<input name='nombre' class='form-control' type='text' placeholder='Nombre'/>";
+      if(request.session.iduser)
+      {
+       html=html+"<input name='nombre' class='form-control' type='text' readonly='readOnly' placeholder='Nombre' value='"+Usarios[0].Nombre+" "+Usarios[0].Apellido+"' />";
+      }
+      else
+      {
+
+       html=html+"<input name='nombre' class='form-control' type='text' placeholder='Nombre'/>";
+      }  
+
       html=html+"<textarea name='comentario' class='form-control' type='text' placeholder='Comentario'/>";
       html=html+"</div>";
       html=html+"<div class='form-group'>";

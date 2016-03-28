@@ -55,14 +55,20 @@ block content
           div(class="row")
              form(action='/articulo/#{Articulo[0]._id}/coment/save/0/0' method='post')
                 div(class="col-md-4")
-                   h3(class="coment") Comentario
-                   br
-                   br
-                   div(class="form-group")
-                      input(name="nombre" class="form-control" type="text" placeholder="Nombre")
-                      textarea(name="comentario" class="form-control" type="text" placeholder="Comentario")
-                   div(class="form-group")
-                      button(class="btn btn-default") Enviar
+                   
+                   if !valse
+                     h3(class="coment") Comentar
+                     br
+                     br
+                     div(class="form-group")
+                        input(name="nombre" class="form-control" type="text" placeholder="Nombre")
+                        textarea(name="comentario" class="form-control" type="text" placeholder="Comentario")
+                     div(class="form-group")
+                        button(class="btn btn-default") Enviar
+                   else
+                     h3(class="coment") Comentarios
+                     br
+                     br                
                 div(class="col-md-4")
                 div(class="col-md-4")
         
