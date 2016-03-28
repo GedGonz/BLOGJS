@@ -14,6 +14,9 @@ block content
                 p #{art.Descripcion}
                 p #{art.Fecha}
                   div(class="text-right")
-                     a(href="/articulo/design/#{art._id}" class="btn btn-default btn-sm" role="button") Ver mas..
+                     a(href="/articulo/design/#{art._id}" class="btn btn-default btn-sm margin_right" role="button") Leer mas..
+                     if valse
+                         a(href="/articulo/design/#{art._id}" class="btn btn-primary btn-sm margin_right" role="button") Update
+                         a(href="/articulo/design/#{art._id}" class="btn btn-danger btn-sm" role="button") Debaja
 
 
