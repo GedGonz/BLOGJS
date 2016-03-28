@@ -12,11 +12,17 @@
  width: 50px;
  border-radius: 50%;
 }
-.fontparr
+#cuerpodata>p
 {
 	font-family: 'Crimson Text', serif;
 	font-size: 1.5em;
 	color: #515151
+}
+#cuerpodata>ul
+{
+    font-family: 'Crimson Text', serif;
+    font-size: 1.5em;
+    color: #515151
 }
 .date
 {
@@ -24,14 +30,34 @@
 	font-size: 1.2em;
 	color: #515151
 }
-.fonttitle
+#cuerpodata>h1
 {
 	font-family: 'Lato', sans-serif;
 	font-weight: bold;
 	font-size: 2.2em;
 	color: #515151
 }
-
+#cuerpodata>h2
+{
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 2.2em;
+    color: #515151
+}
+#cuerpodata>h3
+{
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 2.2em;
+    color: #515151
+}
+.coment
+{
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 2.2em;
+    color: #515151
+}
 .postimage
 {
 	background-color: #191919;
@@ -75,4 +101,21 @@
 {
  max-width: 20%;
 }
+}
+.contsmall
+{
+
+    padding-right: 0px;
+    width: 75px;
+
+}
+.linkhide
+{
+    font-size: 13px;
+}
+.linkhide:hover
+{
+    color: #7D7A88;
+    cursor:pointer;
+
 }

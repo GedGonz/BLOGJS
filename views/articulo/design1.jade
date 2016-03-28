@@ -1,32 +1,88 @@
 extends ../layout
 
 block content
-   div(class="postimage")
-     img(class="Imagarticulo" width="1320" height="850" src="/images/wp.jpg")
-     h1(class="posttitle ") Crea tu primer contenedor de WordPress en Docker
-   br
-   div(class="container")
-      hr(style="color: black; background-color: black; width:100%;")
-      br
-      div(class="row")
-         div(class="col-md-2")
-           img(class="imagautor" src="https://platzi.com/blog/wp-content/authors/Juan%20Castro-95.jpg")
-         div(class="col-md-3")
-            h3 Pedro Garcias
-         div(class="col-md-4")
-         div(class="col-md-3")
-           div(class="date") 9 de Marzo del 2016
-      br
-      h2(class="fonttitle") Crear un contenedor WordPress en Docker
-      br
-      p(class="fontparr") Ahora que ya sabes cómo desplegar contenedores en Docker y crear imágenes también; vamos a resolver una situación más particular. Imaginemos que tenemos un proyecto hecho en WordPress en el que configuramos una tienda online con la extensión WooCommerce.
+    script
+     |var click=false;
+     |$(document).ready(function(){ 
+     |  $('.Formcoment').hide();
+     |  $('.padre').hide();
+     |  $('.tipo').hide();
+     |});
+     |  function imprimir(que)
+     |  {
+     |      if(click==false)
+     |      {
+     |        $('#Formcoment'+que).show();
+     |        $('#iconchange').removeClass('glyphicon glyphicon-menu-down'+que);
+     |        $('#iconchange'+que).addClass('glyphicon glyphicon-menu-up');
+     |        click=true
+     |      }
+     |      else
+     |      {
+     |        click=false;
+     |        $('#Formcoment'+que).hide();
+     |        $('#iconchange'+que).removeClass('glyphicon glyphicon-menu-up');
+     |        $('#iconchange'+que).addClass('glyphicon glyphicon-menu-down');
+     |      }
+     |      return false;
+     |  }
 
-      p(class="fontparr") Supongamos que nos dedicamos a trabajar como diseñadores independientes y tenemos 5 clientes que nos piden el diseño de una tienda online. ¡Y sólo tenemos 2 semanas para entregar! Ahora, configurar e instalar WordPress y WooCommerce es una tarea que toma un tiempo considerable. Pero con Docker este proceso es mucho más fácil.
 
-      p(class="fontparr") Docker nos permite obtener toda la configuración y el entorno de desarrollo para correr nuestra aplicación. De esta manera, podemos tenerla lista para llevarla a producción en 
+    div(class="postimage")
+      img(class="Imagarticulo" width="1320" height="850" src="/images/wp.jpg")
+      h1(class="posttitle ") #{Articulo[0].Titulo}
+    br
+    div(class="container")
+        
+        br
 
-      p(class="fontparr") Ahora que ya sabes cómo desplegar contenedores en Docker y crear imágenes también; vamos a resolver una situación más particular. Imaginemos que tenemos un proyecto hecho en WordPress en el que configuramos una tienda online con la extensión WooCommerce.
+        div(class="row")
+          div(class="col-md-2 contsmall")
+            img(class="imagautor" src="https://platzi.com/blog/wp-content/authors/Juan%20Castro-95.jpg")
+          div(class="col-md-3")
+              h3 #{Articulo[0].Autor}
+          div(class="col-md-4")
+          div(class="col-md-3")
+            div(class="date") 9 de Marzo del 2016
+        br
+        hr(style="color: black; background-color: black; width:100%;")
+        br
 
-      p(class="fontparr") Supongamos que nos dedicamos a trabajar como diseñadores independientes y tenemos 5 clientes que nos piden el diseño de una tienda online. ¡Y sólo tenemos 2 semanas para entregar! Ahora, configurar e instalar WordPress y WooCommerce es una tarea que toma un tiempo considerable. Pero con Docker este proceso es mucho más fácil.
+        div(id="cuerpodata")
+        hr(style="color: black; background-color: black; width:100%;")
+        
+        div(id="Formcoment0" class="Formcoment0")
+          div(class="row")
+             form(action='/articulo/#{Articulo[0]._id}/coment/save/0/0' method='post')
+                div(class="col-md-4")
+                   h3(class="coment") Comentario
+                   br
+                   br
+                   div(class="form-group")
+                      input(name="nombre" class="form-control" type="text" placeholder="Nombre")
+                      textarea(name="comentario" class="form-control" type="text" placeholder="Comentario")
+                   div(class="form-group")
+                      button(class="btn btn-default") Enviar
+                div(class="col-md-4")
+                div(class="col-md-4")
+        
+        br
+        hr(style="color: black; background-color: black; width:100%;")
+        br
+        div(id="cuerpocoment")
+        br
+        br
 
-      p(class="fontparr") Docker nos permite obtener toda la configuración y el entorno de desarrollo para correr nuestra aplicación. De esta manera, podemos tenerla lista para llevarla a producción en 
+
+    script
+      |function htmlDecode ( input ){ 
+      |  var e = document . createElement ( 'div' ); 
+      |  e . innerHTML = input ; 
+      |  return e . childNodes . length ===  0  ?  ""  : e . childNodes [ 0 ]. nodeValue ; 
+      |}
+      | var cuerpo="#{ Articulo[0].Cuerpo}";
+      | var cuerpo =htmlDecode(cuerpo); 
+      | $("#cuerpodata").html(cuerpo);
+      | var comentario="#{comentarios}";
+      | comentario =htmlDecode(comentario); 
+      | $("#cuerpocoment").html(comentario);

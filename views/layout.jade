@@ -2,7 +2,7 @@ doctype html
 html
   head
     title= title
-    
+     meta(name="tipo_contenido"  content="text/html;" http-equiv="content-type" charset="utf-8")
     link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/articulos.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
@@ -61,13 +61,18 @@ html
                 li
                  a(href="/" class="link1") Home
                 li
-                 a(href="/login" class="link2") Login
+                 a(href="/login/new" class="link2") Registrarse
                 li
-                 a(href="/login/new" class="link3") Registrarse
+                 a(href="#" class="link3") Contacto
                 li
-                 a(href="#" class="link4") Contacto
+                 a(href="/login" class="link4") Login
+
   body
-
-    
-
-  block content
+     block content
+  div(class="footer")
+      br
+      p(style="text-align:center; margin-top:1em;") Copyright © 2016 by GedGonz 
+         br
+         span(style="text-align:  center; margin-top:0.5em;") BLOG
+      br
+      p(style="text-align:center; margin-top:2em;")
