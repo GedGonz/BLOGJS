@@ -10,6 +10,7 @@ var Usuario = mongoose.model('Usuario');
   	Cuerpo:String,
   	Fecha:String,
   	Portada:String,
+    Estado:Number,
   	Usuario: { type: Schema.ObjectId, ref: "Usuario" } 
 
   }

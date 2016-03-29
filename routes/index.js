@@ -382,7 +382,7 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
 var datass="./public/uploads/"+nameimage.originalname;
 cloudinary.uploader.upload(datass, function(result) { 
   console.log(result.url) 
-  /*
+  
   var data={
   	Titulo:req.body.Titulo,
   	Autor:req.body.Autor,
@@ -390,6 +390,7 @@ cloudinary.uploader.upload(datass, function(result) {
   	Cuerpo:req.body.Cuerpo.replace(new RegExp('\n','g'), '<br />').replace(new RegExp('\r','g'), ''),
   	Fecha:fecha,
   	Portada:result.url,
+    Estado:0,
   	Usuario:idusuario
   }
 
@@ -415,9 +416,21 @@ cloudinary.uploader.upload(datass, function(result) {
      });
   	}
   		
-    });*/
+    });
   });
   
 });
 
+
+//Update Articulo
+router.get('/articulo/update/:id', function(req, res, next) {
+  var idusuario=req.session.iduser;
+  shemarticulo.Articulo.find({_id:req.params.id},function(err,Art) {
+      shemauser.Usuario.find({_id:idusuario},function(err,User){
+        res.render('articulo/new', { title: 'BlogJS',Articulo: Art,valse:idusuario,User:User});
+     });
+
+  });
+  
+});
 module.exports = router;
