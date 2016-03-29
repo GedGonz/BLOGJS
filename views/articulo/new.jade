@@ -35,7 +35,7 @@ block content
                hr(style="color: black; background-color: black; width:100%;")
                br
                br
-               form(action='/articulo/save' method='post')
+               form(method='POST', action='/articulo/save', enctype='multipart/form-data')
                    div(class="form-group")
                      div(class="row")
                          div(class="col-md-6")
@@ -46,6 +46,26 @@ block content
                      div(class="row")
                          div(class="col-md-12")
                              input(name="Descripcion" type="text" class="form-control" placeholder="Descripcion")
+                             br
+                             div(class="col-md-1")
+                                label Portada
+                             div(class="col-md-3")
+                               div(class="fileupload fileupload-new" data-provides="fileupload")
+                                  span(class="btn btn-default btn-file") 
+                                    span(class="fileupload-new") Examinar
+                                    span(class="fileupload-exists") Change
+                                    input(name="portada"  type="file")
+                                  span(class="fileupload-preview margin-left")
+                                  a(id="FileNameSelect"  href="#" class="close fileupload-exists"   data-dismiss="fileupload" style="float: none") x
+                             div(class="col-md-6")
+                             div(class="col-md-2")
+                                   a(id="btnPreview text-right" class="btn btn-primary")
+                                     <span class="glyphicon glyphicon-eye-open"></span>
+                             hr(style="color: black; background-color: black; width:100%;")
+                             div(class="prevImag text-center" id="prevImag") not Image
+                             hr(style="color: black; background-color: black; width:100%;")
+                             
+
                      br
                      label Cuerpo
                      hr

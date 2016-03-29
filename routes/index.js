@@ -1,13 +1,47 @@
 var express = require('express');
+var multer=require('multer');
+var cloudinary = require('cloudinary');
 var router = express.Router();
 var shemauser=require('../model/ShemaUsuario');
 var shemarticulo=require('../model/ShemaArticulo');
 var shemacoment=require('../model/ShemaComentario');
+
 var html="";
 var value="";
 var datacoments="";
 var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+var nameimage="" ;
+cloudinary.config({ 
+  cloud_name: 'gedgonz', 
+  api_key: '817862158519284', 
+  api_secret: 'Yi7Usj78XdZhcpnHzwquG9fvt3E' 
+});
 
+var storage =   multer.diskStorage({
+  destination: function (req, file, callback) {
+     var tipo=file.mimetype;
+     console.log(file.originalname);
+ if(tipo=='image/png' || tipo=='image/jpg' || tipo=='image/jpeg')
+ {
+  /*console.log(file.originalname);*/
+    callback(null, './public/uploads/');
+ }
+
+     
+    
+  },
+  filename: function (req, file, callback) {
+      nameimage=file;
+    callback(null, file.originalname);
+  }
+});
+
+function getFecha(Art,meses) {
+   for (var i = 0; i <Art.length; i++) {
+          var numMes=Art[i].Fecha.substring(3,4);
+          var Fecha=Art[i].Fecha.substring(0,2)+" de "+meses[numMes-1]+" del "+Art[i].Fecha.substring(5,9)
+          Art[i].Fecha=Fecha;
+   }
 
 }
 /* GET home page. */
@@ -185,6 +219,7 @@ router.get('/articulo/design/:id', function(req, res, next) {
     Comentarios.forEach(function(com) {
       var id="";
      
+    console.log("Entra con id: "+com.Nombre);
       
       html=html+"<div id='comentarios'>";
       html=html+"<div class='row'>";
@@ -224,6 +259,7 @@ router.get('/articulo/design/:id', function(req, res, next) {
 
        html=html+"<input name='nombre' class='form-control' type='text' placeholder='Nombre'/>";
       }  
+
       html=html+"<textarea name='comentario' class='form-control' type='text' placeholder='Comentario'/>";
       html=html+"</div>";
       html=html+"<div class='form-group'>";
@@ -337,52 +373,51 @@ router.get('/articulo/new', function(req, res, next) {
 });
 
 //save Articulo
-router.post('/articulo/save', function(req, res, next) {
-  
+router.post('/articulo/save',multer({ storage : storage}).single('portada'), function(req, res, next) {
 
+  
   var date=new Date();
   var fecha=date.getDate() + "/" + (date.getMonth() +1) + "/" + date.getFullYear()
   var idusuario=req.session.iduser;
+var datass="./public/uploads/"+nameimage.originalname;
+cloudinary.uploader.upload(datass, function(result) { 
+  console.log(result.url) 
+  /*
   var data={
   	Titulo:req.body.Titulo,
   	Autor:req.body.Autor,
   	Descripcion:req.body.Descripcion,
   	Cuerpo:req.body.Cuerpo.replace(new RegExp('\n','g'), '<br />').replace(new RegExp('\r','g'), ''),
   	Fecha:fecha,
-  	Portada:"Portada.png",
+  	Portada:result.url,
   	Usuario:idusuario
   }
 
   var Articulodata=new shemarticulo.Articulo(data);
 
-  console.log(Articulodata);
+  //console.log(Articulodata);
 
   Articulodata.save(function(err)
   {
   	if(!err)
   	{
-		console.log(Articulodata);
-         shemauser.Usuario.find({_id:sessions},function(err,User){
-      res.render('articulo/new', { title: 'BlogJS',valse:sessions,User:User});
+		//console.log(Articulodata);
+         shemauser.Usuario.find({_id:idusuario},function(err,User){
+
+      res.render('articulo/new', { title: 'BlogJS',valse:idusuario ,User:User});
      });
 
   	}
   	else
   	{
-           shemauser.Usuario.find({_id:sessions},function(err,User){
-      res.render('welcome/index', { title: 'BlogJS',valse:sessions,User:User});
+           shemauser.Usuario.find({_id:idusuario},function(err,User){
+      res.render('welcome/index', { title: 'BlogJS',valse:idusuario,User:User});
      });
   	}
   		
+    });*/
   });
-
   
 });
 
-function getFecha(Art,meses) {
-   for (var i = 0; i <Art.length; i++) {
-          var numMes=Art[i].Fecha.substring(3,4);
-          var Fecha=Art[i].Fecha.substring(0,2)+" de "+meses[numMes-1]+" del "+Art[i].Fecha.substring(5,9)
-          Art[i].Fecha=Fecha;
-   }
 module.exports = router;
