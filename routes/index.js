@@ -6,15 +6,21 @@ var shemacoment=require('../model/ShemaComentario');
 var html="";
 var value="";
 var datacoments="";
+var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 
 
+}
 /* GET home page. */
 router.get('/', function(req, res, next) {
       var sessions=req.session.iduser;
+       
+
       if(sessions)
       {
         shemarticulo.Articulo.find({Usuario:sessions},function(err,Art) {
+
           shemauser.Usuario.find({_id:sessions},function(err,User){
+            getFecha(Art,meses);
             res.render('articulo/listall', { title: 'BlogJS',Articulos:Art,valse:sessions,User:User});
           });
            
@@ -23,7 +29,7 @@ router.get('/', function(req, res, next) {
       else
       {
         shemarticulo.Articulo.find(function(err,Art) {
-
+           getFecha(Art,meses);
          res.render('welcome/index', { title: 'BlogJS',Articulos:Art,valse:sessions});
         });
       }
@@ -70,8 +76,9 @@ router.post('/login/count', function(req, res, next) {
       {
        
       shemarticulo.Articulo.find({Usuario:iduser},function(err,Art) {
-        shemauser.Usuario.find({_id:iduser},function(err,User){
 
+        shemauser.Usuario.find({_id:iduser},function(err,User){
+          getFecha(Art,meses);
             res.render('articulo/listall', { title: 'BlogJS',Articulos:Art,valse:sessions,User:User});
           });
       });
@@ -80,12 +87,14 @@ router.post('/login/count', function(req, res, next) {
       else
        {
           shemauser.Usuario.find({_id:iduser},function(err,User){
+              getFecha(Art,meses);
             res.render('/', { title: 'BlogJS',Articulos:Art,valse:sessions,User:User});
           });
        }
      }
      else{
           shemauser.Usuario.find({_id:sessions},function(err,User){
+             getFecha(Art,meses);
             res.render('usuario/login', { title: 'BlogJS',Articulos:Art,valse:sessions,User:User});
           });
          }
@@ -144,11 +153,16 @@ router.get('/articulo/design/:id', function(req, res, next) {
   var sessions=req.session.iduser; 
 	 //console.log(req.params.id);
    //var html=html();
+  
 	shemarticulo.Articulo.find({_id:req.params.id},function(err,Art) {
 
   shemacoment.Comentario.find({Articulo:req.params.id},function(err,coment) {
 
-    
+      var numMes=Art[0].Fecha.substring(3,4);
+      var Fecha=Art[0].Fecha.substring(0,2)+" de "+meses[numMes-1]+" del "+Art[0].Fecha.substring(5,9)
+
+      Art[0].Fecha=Fecha;
+      //var fecha=f.getDay() + " de " + (f.getMonth() + 1) + "/" + f.getFullYear();
       shemauser.Usuario.find({_id:sessions},function(err,User){
         var datahtml=iterahtml(coment,User,req);
        res.render('articulo/design1', { title: 'BlogJS',Articulo: Art,comentarios: datahtml,valse:sessions,User:User});
@@ -171,7 +185,6 @@ router.get('/articulo/design/:id', function(req, res, next) {
     Comentarios.forEach(function(com) {
       var id="";
      
-       console.log("Entra con id: "+com.Nombre);
       
       html=html+"<div id='comentarios'>";
       html=html+"<div class='row'>";
@@ -211,7 +224,6 @@ router.get('/articulo/design/:id', function(req, res, next) {
 
        html=html+"<input name='nombre' class='form-control' type='text' placeholder='Nombre'/>";
       }  
-
       html=html+"<textarea name='comentario' class='form-control' type='text' placeholder='Comentario'/>";
       html=html+"</div>";
       html=html+"<div class='form-group'>";
@@ -367,4 +379,10 @@ router.post('/articulo/save', function(req, res, next) {
   
 });
 
+function getFecha(Art,meses) {
+   for (var i = 0; i <Art.length; i++) {
+          var numMes=Art[i].Fecha.substring(3,4);
+          var Fecha=Art[i].Fecha.substring(0,2)+" de "+meses[numMes-1]+" del "+Art[i].Fecha.substring(5,9)
+          Art[i].Fecha=Fecha;
+   }
 module.exports = router;
