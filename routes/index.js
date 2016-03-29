@@ -379,8 +379,8 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
   var date=new Date();
   var fecha=date.getDate() + "/" + (date.getMonth() +1) + "/" + date.getFullYear()
   var idusuario=req.session.iduser;
-var datass="./public/uploads/"+nameimage.originalname;
-cloudinary.uploader.upload(datass, function(result) { 
+  var datass="./public/uploads/"+nameimage.originalname;
+  cloudinary.uploader.upload(datass, function(result) { 
   console.log(result.url) 
   
   var data={
@@ -395,28 +395,66 @@ cloudinary.uploader.upload(datass, function(result) {
   }
 
   var Articulodata=new shemarticulo.Articulo(data);
-
+  var valupdate=req.body.updateart;
   //console.log(Articulodata);
+   if(valupdate)
+   {
+    shemarticulo.Articulo.find({_id:valupdate},function(err,Art) {
+            Art[0].Titulo=req.body.Titulo;
+            Art[0].Autor=req.body.Autor;
+            Art[0].Descripcion=req.body.Descripcion;
+            Art[0].Cuerpo=req.body.Cuerpo.replace(new RegExp('\n','g'), '<br />').replace(new RegExp('\r','g'), '');
+            Art[0].Fecha=fecha;
+            Art[0].Portada="Portada.png";
+            Art[0].Estado=0;
+            Art[0].Usuario=idusuario;
+            console.log("Entraron en Condicion: "+req.body.Descripcion);
+            console.log(Art);
+            Art[0].save(function(err)
+            {
+              if(!err)
+              {
+              //console.log(Articulodata);
+                   shemauser.Usuario.find({_id:idusuario},function(err,User){
 
-  Articulodata.save(function(err)
-  {
-  	if(!err)
-  	{
-		//console.log(Articulodata);
-         shemauser.Usuario.find({_id:idusuario},function(err,User){
+                res.render('articulo/new', { title: 'BlogJS',valse:idusuario ,User:User});
+               });
 
-      res.render('articulo/new', { title: 'BlogJS',valse:idusuario ,User:User});
-     });
-
-  	}
-  	else
-  	{
-           shemauser.Usuario.find({_id:idusuario},function(err,User){
-      res.render('welcome/index', { title: 'BlogJS',valse:idusuario,User:User});
-     });
-  	}
-  		
+              }
+              else
+              {
+                     shemauser.Usuario.find({_id:idusuario},function(err,User){
+                res.render('welcome/index', { title: 'BlogJS',valse:idusuario,User:User});
+               });
+              }
+                
+             });
     });
+   }
+   else
+   {
+  
+      Articulodata.save(function(err)
+      {
+        if(!err)
+        {
+        //console.log(Articulodata);
+             shemauser.Usuario.find({_id:idusuario},function(err,User){
+
+          res.render('articulo/new', { title: 'BlogJS',valse:idusuario ,User:User});
+         });
+
+        }
+        else
+        {
+               shemauser.Usuario.find({_id:idusuario},function(err,User){
+          res.render('welcome/index', { title: 'BlogJS',valse:idusuario,User:User});
+         });
+        }
+          
+        });
+   }
+
   });
   
 });

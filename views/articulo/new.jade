@@ -43,6 +43,7 @@ block content
                      div(class="row")
                          div(class="col-md-6")
                              if valse && Articulo && User
+                                input(name="updateart" type="hidden" value=Articulo[0]._id)
                                 input(name="Titulo" type="text" class="form-control" placeholder="Titulo" value= Articulo[0].Titulo)
                                 br
                                 input(name="Autor" type="text" class="form-control" placeholder="Autor" readOnly="readOnly" value= User[0].Nombre+" "+User[0].Apellido)
@@ -87,8 +88,12 @@ block content
                      br
                      br
                      div(class="form-group text-right")
-                         button(type="submit" class="btn btn-primary ")
-                            <span class="glyphicon glyphicon-ok"></span> Create
+                         if valse && Articulo && User
+                           button(type="submit" class="btn btn-primary ")
+                              <span class="glyphicon glyphicon-ok"></span> Update
+                         else
+                           button(type="submit" class="btn btn-primary ")
+                              <span class="glyphicon glyphicon-ok"></span> Crear                           
 
                          button(class="btn btn-danger")
                             <span class="glyphicon glyphicon-remove"></span> Cancel
