@@ -4,18 +4,24 @@ block content
 
    div(class="container")
       div(class="row margin")
-      each art in Articulos
-          div(class="col-sm-6 col-md-4") 
-            div(class="thumbnail")
-               img(class="Imagarticulo" width="1320" height="850" src="/images/wp.jpg")
-               div(class="caption")
-                h4 #{art.Titulo}
-                p #{art.Descripcion}
-                p #{art.Fecha}
-                  div(class="text-right")
-                     a(href="/articulo/design/#{art._id}" class="btn btn-default btn-sm margin_right" role="button") Leer mas..
-                     if valse
-                         a(href="/articulo/update/#{art._id}" class="btn btn-primary btn-sm margin_right" role="button") Update
-                         a(href="/articulo/below/#{art._id}" class="btn btn-danger btn-sm" role="button") Debaja
-
-
+      if Articulos.length>0
+          each art in Articulos
+              div(class="col-sm-6 col-md-4") 
+                div(class="thumbnail")
+                   img(class="Imagarticulo" width="1320" height="850" src="/images/wp.jpg")
+                   div(class="caption")
+                    h4 #{art.Titulo}
+                    p #{art.Descripcion}
+                    p #{art.Fecha}
+                      div(class="text-right")
+                         a(href="/articulo/design/#{art._id}" class="btn btn-default btn-sm margin_right" role="button") Leer mas..
+                         if valse
+                             a(href="/articulo/update/#{art._id}" class="btn btn-primary btn-sm margin_right" role="button") Update
+                             if estado    
+                                 a(href="/articulo/below/#{art._id}/1" class="btn btn-danger btn-sm" role="button") Activar
+                             else
+                                 a(href="/articulo/below/#{art._id}/0" class="btn btn-danger btn-sm" role="button") Desactivar
+      else
+          div(class="coment text-center") No se encontraron Articulos!!
+          br
+          br

@@ -471,11 +471,20 @@ router.get('/articulo/update/:id', function(req, res, next) {
 
 
 //below Articulo
-router.get('/articulo/below/:id', function(req, res, next) {
+router.get('/articulo/below/:id/:estado', function(req, res, next) {
   var idusuario=req.session.iduser;
-  shemarticulo.Articulo.find({_id:req.params.id,Estado:0},function(err,Art) {
-
-      Art[0].Estado=1;
+  shemarticulo.Articulo.find({_id:req.params.id,Estado:req.params.estado},function(err,Art) {
+      console.log("Id: "+req.params.id);
+      console.log("Estado: "+req.params.estado);
+      if(req.params.estado > 0)
+      {
+        Art[0].Estado=0;
+      }
+      else
+      {
+        Art[0].Estado=1;
+      }
+      
 
       shemauser.Usuario.find({_id:idusuario},function(err,User){
 
@@ -505,4 +514,21 @@ router.get('/articulo/below/:id', function(req, res, next) {
   });
   
 });
+
+//inactivos Articulo
+router.get('/articulo/inactivos', function(req, res, next) {
+  var idusuario=req.session.iduser;
+  shemarticulo.Articulo.find({Usuario:idusuario,Estado:1},function(err,Art) {
+
+
+      shemauser.Usuario.find({_id:idusuario},function(err,User){
+          
+            res.render('articulo/listall', { title: 'BlogJS',Articulos:Art,valse:idusuario,User:User,estado:true});     
+
+     });
+
+  });
+  
+});
+
 module.exports = router;
