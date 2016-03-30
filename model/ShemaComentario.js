@@ -3,7 +3,7 @@ var shemauser=require('./ShemaUsuario');
 var shemauser=require('./ShemaArticulo');
 var Schema = mongoose.Schema;
 var Articulo = mongoose.model('Articulo');
-
+ 
   var ComentarioShema={
   	Nombre:String,
   	Comentario:String,
