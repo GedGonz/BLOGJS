@@ -1,6 +1,6 @@
 var express = require('express');
 var multer=require('multer');
-var cloudinary = require('cloudinary');
+var cloudinary = require('../config/cloudinary');
 var router = express.Router();
 var shemauser=require('../model/ShemaUsuario');
 var shemarticulo=require('../model/ShemaArticulo');
@@ -11,11 +11,7 @@ var value="";
 var datacoments="";
 var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 var nameimage="" ;
-cloudinary.config({ 
-  cloud_name: 'gedgonz', 
-  api_key: '817862158519284', 
-  api_secret: 'Yi7Usj78XdZhcpnHzwquG9fvt3E' 
-});
+
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {

@@ -1,4 +1,4 @@
-var mongoose= require('mongoose');
+var mongoose= require('../config/mongoose');
 var shemauser=require('./ShemaUsuario');
 var shemauser=require('./ShemaArticulo');
 var Schema = mongoose.Schema;
