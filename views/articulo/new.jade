@@ -28,6 +28,24 @@ block content
        |  'http://www.tinymce.com/css/codepen.min.css'
        |]
        | });
+       | var nval=false;
+       | $(document).ready(function(){
+       | });
+       | /*Hace una Previsualizacion de la imagen antes de cargarla*/
+       |   function mostrar()
+       |   {
+       |     var input = document.getElementById("portada");
+       |     var fReader = new FileReader();
+       |       fReader.readAsDataURL(input.files[0]);
+       |       fReader.onloadend = function(event){
+       |       var img = document.getElementById("matrix");
+       |       img.src = event.target.result;
+       |       $('.prevImag').hide();
+       |       nval=true;
+       |         }
+       |     return false
+       | }
+
     div(class="container")
 
       div(class="row margin")
@@ -66,15 +84,19 @@ block content
                                   span(class="btn btn-default btn-file") 
                                     span(class="fileupload-new") Examinar
                                     span(class="fileupload-exists") Change
-                                    input(name="portada"  type="file")
+                                    input(id="portada" name="portada"  type="file")
                                   span(class="fileupload-preview margin-left")
                                   a(id="FileNameSelect"  href="#" class="close fileupload-exists"   data-dismiss="fileupload" style="float: none") x
                              div(class="col-md-6")
                              div(class="col-md-2")
-                                   a(id="btnPreview text-right" class="btn btn-primary")
+                                   a(id="btnPreview " class="btn btn-primary text-right" OnClick="mostrar();")
                                      <span class="glyphicon glyphicon-eye-open"></span>
                              hr(style="color: black; background-color: black; width:100%;")
-                             div(class="prevImag text-center" id="prevImag") not Image
+                             if valse && Articulo && User
+                               img(class="Imagcoment" src="http://res.cloudinary.com/gedgonz/image/upload/v1457199166/OC-Blog_pqzh4t.png")
+                             else
+                               div(class="prevImag text-center" id="prevImag") not Image
+                               img(class="ImageUpload" src="" alt="" id="matrix")
                              hr(style="color: black; background-color: black; width:100%;")
                              
 
