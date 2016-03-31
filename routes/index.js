@@ -118,14 +118,14 @@ router.post('/login/count', function(req, res, next) {
        {
           shemauser.Usuario.find({_id:iduser},function(err,User){
               getFecha(Art,meses);
-            res.render('/', { title: 'BlogJS',Articulos:Art,valse:sessions,User:User});
+            res.render('/', { title: 'BlogJS',valse:sessions,User:User});
           });
        }
      }
      else{
           shemauser.Usuario.find({_id:sessions},function(err,User){
-             getFecha(Art,meses);
-            res.render('usuario/login', { title: 'BlogJS',Articulos:Art,valse:sessions,User:User});
+             //getFecha(Art,meses);
+            res.render('usuario/login', { title: 'BlogJS',valse:sessions,User:User});
           });
          }
 
@@ -182,6 +182,7 @@ var sessions=req.session.iduser;
 //Find by id Articulo
 router.get('/articulo/design/:id', function(req, res, next) {
   var sessions=req.session.iduser; 
+
 	 //console.log(req.params.id);
    //var html=html();
   
@@ -190,14 +191,25 @@ router.get('/articulo/design/:id', function(req, res, next) {
   shemacoment.Comentario.find({Articulo:req.params.id},function(err,coment) {
 
       var numMes=Art[0].Fecha.substring(3,4);
-      var Fecha=Art[0].Fecha.substring(0,2)+" de "+meses[numMes-1]+" del "+Art[0].Fecha.substring(5,9)
+      var Fecha=Art[0].Fecha.substring(0,2)+" de "+meses[numMes-1]+" del "+Art[0].Fecha.substring(5,9);
 
       Art[0].Fecha=Fecha;
       //var fecha=f.getDay() + " de " + (f.getMonth() + 1) + "/" + f.getFullYear();
-      shemauser.Usuario.find({_id:sessions},function(err,User){
+
+      if(sessions)
+      {
+       shemauser.Usuario.find({_id:sessions},function(err,User){
         var datahtml=iterahtml(coment,User,req);
        res.render('articulo/design1', { title: 'BlogJS',Articulo: Art,comentarios: datahtml,valse:sessions,User:User});
      });
+      }
+      else
+      {
+       shemauser.Usuario.find({_id:Art[0].Usuario},function(err,User){
+        var datahtml=iterahtml(coment,User,req);
+       res.render('articulo/design1', { title: 'BlogJS',Articulo: Art,comentarios: datahtml,valse:sessions,User:User});
+      });
+      }
 
     html="";
    });
@@ -253,7 +265,6 @@ router.get('/articulo/design/:id', function(req, res, next) {
       }
       else
       {
-
        html=html+"<input name='nombre' class='form-control' type='text' placeholder='Nombre'/>";
       }  
 
