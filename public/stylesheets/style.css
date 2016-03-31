@@ -67,7 +67,12 @@ z-index: 1001;
 }
 .thumbnail
 {
+  border-radius: 0px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    height: 14em;
 }
 .thumbnail:hover
 {
