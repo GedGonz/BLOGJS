@@ -1,11 +1,16 @@
 .Imagarticulo
 {
-	height: 20<em;
+	height: 20em;
 	min-height:100%;
 	width: 100%; 
 	max-height: 600px;
 	min-height: 100%;
     opacity: 0.8;
+}
+.ImageUser
+{
+    height: 8em;
+    width: 35%
 }
 .ImageUpload
 {
@@ -19,7 +24,7 @@
 .imagautor
 {
  width: 50px;
- border-radius: 50%;
+ border-radius: 100%;
 }
 #cuerpodata>p
 {

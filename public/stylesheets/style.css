@@ -129,7 +129,16 @@ z-index: 1001;
   color: white;
   font-weight: bold;
   padding-top: 11px;
-  padding-left: 5em;
+  padding-left: 1em;
+  line-height: 20px;
+  display: block;
+}
+.photoUser
+{
+  margin-left: 2em;
+  height:3em;
+  width: 3em;
+  border-radius: 50%;
   line-height: 20px;
   display: block;
 }

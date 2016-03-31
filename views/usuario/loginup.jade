@@ -1,6 +1,25 @@
 extends ../layout
 
 block content
+   script
+    | var nval=false;
+    | $(document).ready(function(){
+    | $("#imagenUser").hide();
+    | });
+    | /*Hace una Previsualizacion de la imagen antes de cargarla*/
+    |   function mostrar()
+    |   {
+    |     var input = document.getElementById("PhotoUser");
+    |     var fReader = new FileReader();
+    |       fReader.readAsDataURL(input.files[0]);
+    |       fReader.onloadend = function(event){
+    |       var img = document.getElementById("matrix");
+    |       img.src = event.target.result;
+    |       $('#imagenUser').show();
+    |       nval=true;
+    |         }
+    |     return false
+    | }
    div(class="container")
 
       div(class="row margin")
@@ -12,25 +31,39 @@ block content
                   h3(class="titlelogin") New-
                     span(class="spaner") User
                   div(class="borde")
-                  <br>
-                  <br>
+                  br
+                  br
                form(action='/login/save' method='post')
                    div(class="form-group")
+                      div(class="contentimag text-center" id="imagenUser")
+                        img(class="ImageUser" src="" alt="" id="matrix")
+                      br
                       input(name="nombre" type="text" class="form-control" placeholder="Name")
-                      <br>
+                      br
                       input(name="apellido" type="text" class="form-control" placeholder="Lasname")
-                      <br>
+                      br
                       input(name="usuario" type="text" class="form-control" placeholder="Username")
-                      <br>
-                      input(name="pasword" type="password" class="form-control" placeholder="Passworduser")
-                      <br>
+                      br
+                      input(name="pasword" type="password" class="form-control" placeholder="Password")
+                      br
                       input(name="rpasword" type="password" class="form-control" placeholder="Repeat Password")
-                      <br>
-                      <br>
+                      br
+
+                      div(class="fileupload fileupload-new" data-provides="fileupload")
+                         span(class="btn btn-default btn-file") 
+                           span(class="fileupload-new") Photo
+                           span(class="fileupload-exists") Change
+                           input(id="PhotoUser" name="portada"  type="file")
+                         span(class="fileupload-preview margin-left")
+                         a(id="FileNameSelect"  href="#" class="close fileupload-exists"  data-dismiss="fileupload" style="float: none") x
+                      a(id="btnPreview " for="Vista Previa" class="btn btn-primary text-right" OnClick="mostrar();")
+                        span(class="glyphicon glyphicon-eye-open")
+                      br
+                      br
                       div(class="form-group")
                          button(type="submit" class="btn btn-primary btn-group-justified")
-                            <span class="glyphicon glyphicon-ok"></span> Create
+                            span(class="glyphicon glyphicon-ok") Create
 
                          button(class="btn btn-danger btn-group-justified")
-                            <span class="glyphicon glyphicon-remove"></span> Cancel
+                            span(class="glyphicon glyphicon-remove") Cancel
          div(class="col-sm-3 col-md-4")

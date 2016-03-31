@@ -150,7 +150,8 @@ var sessions=req.session.iduser;
 	Nombre:req.body.nombre,
   	Apellido:req.body.apellido,
   	Usuario:req.body.usuario,
-  	Password:req.body.pasword
+  	Password:req.body.pasword,
+    Photo:"../../images/Photo.jpg" /*Falta Cargar la Foto desde el controlador*/
   }
 
   var Usariodata=new shemauser.Usuario(data);
@@ -223,7 +224,7 @@ router.get('/articulo/design/:id', function(req, res, next) {
       html=html+"<div class='col-md-4'>";
       html=html+"<div class='row'>";
       html=html+"<div class='col-sm-3 contsmall'>";
-      html=html+"<img class='imagautor' src='https://platzi.com/blog/wp-content/authors/Juan%20Castro-95.jpg'>";
+      html=html+"<img class='imagautor' src='http://res.cloudinary.com/gedgonz/image/upload/v1457199149/iconcoment3_ht4e4a.png'>";
       html=html+"</div>";
       html=html+"<div class='col-sm-6'>";
       html=html+"<h4 id='nucoment'> "+com.Nombre+"</h4>";

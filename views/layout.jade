@@ -60,7 +60,9 @@ html
             if valse
                ul(class="nav navbar-nav navbar-center")
                    li
-                    p(class="nameuser") #{User[0].Nombre+" "+User[0].Apellido}          
+                     img(class="photoUser" src="#{User[0].Photo}" for="#{User[0].Nombre+" "+User[0].Apellido}")
+                   li
+                     p(class="nameuser") #{User[0].Nombre+" "+User[0].Apellido}          
             ul(class="nav navbar-nav navbar-right")
                 li
                  a(href="/" class="link1") Home
