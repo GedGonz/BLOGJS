@@ -55,7 +55,6 @@ function getFecha(Art,meses) {
 router.get('/', function(req, res, next) {
       var sessions=req.session.iduser;
        
-      console.log(titlePage);
       if(sessions)
       {
         shemarticulo.Articulo.find({Usuario:sessions,Estado:0},function(err,Art) {
@@ -199,31 +198,31 @@ router.get('/articulo/design/:id', function(req, res, next) {
   
 	shemarticulo.Articulo.find({_id:req.params.id,Estado:0},function(err,Art) {
 
-  shemacoment.Comentario.find({Articulo:req.params.id},function(err,coment) {
+    shemacoment.Comentario.find({Articulo:req.params.id},function(err,coment) {
 
-      var numMes=Art[0].Fecha.substring(3,4);
-      var Fecha=Art[0].Fecha.substring(0,2)+" de "+meses[numMes-1]+" del "+Art[0].Fecha.substring(5,9);
+        var numMes=Art[0].Fecha.substring(3,4);
+        var Fecha=Art[0].Fecha.substring(0,2)+" de "+meses[numMes-1]+" del "+Art[0].Fecha.substring(5,9);
 
-      Art[0].Fecha=Fecha;
-      //var fecha=f.getDay() + " de " + (f.getMonth() + 1) + "/" + f.getFullYear();
+        Art[0].Fecha=Fecha;
+        //var fecha=f.getDay() + " de " + (f.getMonth() + 1) + "/" + f.getFullYear();
 
-      if(sessions)
-      {
-       shemauser.Usuario.find({_id:sessions},function(err,User){
-        var datahtml=iterahtml(coment,User,req);
-       res.render('articulo/design1', { title: titlePage.listall,Articulo: Art,comentarios: datahtml,valse:sessions,User:User});
+        if(sessions)
+        {
+         shemauser.Usuario.find({_id:sessions},function(err,User){
+          var datahtml=iterahtml(coment,User,req);
+         res.render('articulo/design1', { title: titlePage.listall,Articulo: Art,comentarios: datahtml,valse:sessions,User:User});
+       });
+        }
+        else
+        {
+         shemauser.Usuario.find({_id:Art[0].Usuario},function(err,User){
+          var datahtml=iterahtml(coment,User,req);
+         res.render('articulo/design1', { title: titlePage.listall,Articulo: Art,comentarios: datahtml,valse:sessions,User:User});
+        });
+        }
+
+      html="";
      });
-      }
-      else
-      {
-       shemauser.Usuario.find({_id:Art[0].Usuario},function(err,User){
-        var datahtml=iterahtml(coment,User,req);
-       res.render('articulo/design1', { title: titlePage.listall,Articulo: Art,comentarios: datahtml,valse:sessions,User:User});
-      });
-      }
-
-    html="";
-   });
 
   });
 
