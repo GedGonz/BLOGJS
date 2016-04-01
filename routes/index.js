@@ -46,7 +46,16 @@ var storage =   multer.diskStorage({
 function getFecha(Art,meses) {
    for (var i = 0; i <Art.length; i++) {
           var numMes=Art[i].Fecha.substring(3,4);
-          var Fecha=Art[i].Fecha.substring(0,2)+" de "+meses[numMes-1]+" del "+Art[i].Fecha.substring(5,9)
+          var dia=Art[i].Fecha.substring(0,2);
+          var anio=Art[i].Fecha.substring(5,9);
+          if(dia.substring(1,2)=="/")
+          {
+            dia=dia.substring(0,1);
+            numMes=Art[i].Fecha.substring(2,3);
+            anio=Art[i].Fecha.substring(4,8);
+          }
+
+          var Fecha=dia+" de "+meses[numMes-1]+" del "+anio
           Art[i].Fecha=Fecha;
    }
 

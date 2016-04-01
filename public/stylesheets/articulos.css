@@ -7,6 +7,14 @@
 	min-height: 100%;
     opacity: 0.8;
 }
+.Cardarticulo
+{
+    height: 20em;
+    min-height:100%;
+    width: 100%; 
+    max-height: 600px;
+    min-height: 100%;
+}
 .ImageUser
 {
     height: 8em;

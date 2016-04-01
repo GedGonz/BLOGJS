@@ -30,7 +30,9 @@ body {
 {
 	background: #273B47;
 	border-color: #273B47;
-	color: white;
+  /*color: white;*/
+  box-shadow: 0px 0px 5px 0px;
+
 
 }
 .navbar {
@@ -44,7 +46,7 @@ z-index: 1001;
 }
 
 .navbar-default .navbar-nav>li>a {
-    color: white;
+  color: white;
 	font-weight: bold;
 }
 
