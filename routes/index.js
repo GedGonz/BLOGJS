@@ -13,7 +13,7 @@ var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio",
 var nameimage="" ;
 var titlePage=
 {
-  Inicio:"BlogJS",
+  Inicio:"BLOGJS",
   Login:"Login",
   LoginUp:"loginup",
   count:"Admin BlogJS",
@@ -44,18 +44,41 @@ var storage =   multer.diskStorage({
 });
 
 function getFecha(Art,meses) {
-   for (var i = 0; i <Art.length; i++) {
-          var numMes=Art[i].Fecha.substring(3,4);
+   for (var i = 0; i <Art.length; i++) 
+   {
+    /*
+  1/1/2016
+  1/11/2016
+  15/1/2016
+  15/11/2016
+*/
           var dia=Art[i].Fecha.substring(0,2);
-          var anio=Art[i].Fecha.substring(5,9);
+          var mes=Art[i].Fecha.substring(3,5);
+          var anio=Art[i].Fecha.substring(6,10);
           if(dia.substring(1,2)=="/")
           {
             dia=dia.substring(0,1);
-            numMes=Art[i].Fecha.substring(2,3);
-            anio=Art[i].Fecha.substring(4,8);
+            if(mes.substring(3,4)!="/")
+            {
+            mes=Art[i].Fecha.substring(2,3);
+            }
+            else
+            {
+            mes=Art[i].Fecha.substring(2,4);
+            anio=Art[i].Fecha.substring(5,9);
+            }
+            
+          }
+          
+          else if(mes.substring(3,4)!="/")
+          {
+            dia=dia.substring(0,2);
+            mes=Art[i].Fecha.substring(3,4);
+            anio=Art[i].Fecha.substring(5,9);
           }
 
-          var Fecha=dia+" de "+meses[numMes-1]+" del "+anio
+
+          var Fecha=dia+" de "+meses[mes-1]+" del "+anio
           Art[i].Fecha=Fecha;
    }
 

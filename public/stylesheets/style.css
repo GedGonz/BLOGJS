@@ -20,10 +20,29 @@ body {
 }
 
 .navbar-default .navbar-brand {
-   padding-left: 1em;
+   padding-left: 2em;
 }
-.Imagcoment {
-    width: 50px;
+.navbar-brand>img {
+    display: inline;
+}
+.titlePage {
+    
+    margin-top:0.7em;
+}
+.logpage
+{
+  
+}
+
+.textgreen
+{
+  color:#9CCB3B;
+  font-weight: bold;
+}
+.textblue
+{
+  color:#00A1E0;
+  font-weight: bold;
 }
 
 .navbar-default
@@ -137,7 +156,7 @@ z-index: 1001;
 }
 .photoUser
 {
-  margin-left: 2em;
+  margin-left: 3em;
   height:3em;
   width: 3em;
   border-radius: 50%;

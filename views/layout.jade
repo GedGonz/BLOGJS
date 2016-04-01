@@ -3,6 +3,9 @@ html
   head
     title= title
     meta(name="tipo_contenido"  content="text/html;" http-equiv="content-type" charset="utf-8")
+    meta(name="description" content="Articulos sobre Tecnologia Web")
+    meta(name="keywords" content="HTML,CSS,XML,JavaScript,NodeJS,Ruby, Ruby on Rails,RoR")
+    meta(name="author" content="Gerald Gonzalez Zeledon")
     link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/articulos.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
@@ -49,7 +52,10 @@ html
         div(class="container-fluid")
         div(class="navbar-header")
             a(class="navbar-brand" href="/")
-                img(class="Imagcoment" src="http://res.cloudinary.com/gedgonz/image/upload/v1457199166/OC-Blog_pqzh4t.png")
+                div(class="titlePage" title="BLOGJS")
+                   img(src="http://res.cloudinary.com/gedgonz/image/upload/c_scale,w_28/v1459537935/OC-Blog_pqzh4t.png")
+                   span(class="textblue") BLOG
+                      span(class="textgreen") JS
             button(type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse")
                 span(class="sr-only") Desplegar navegación
                 span(class="icon-bar")
@@ -94,7 +100,7 @@ html
      block content
   div(class="footer")
       br
-      p(style="text-align:center; margin-top:1em;") Copyright © 2016 by GedGonz 
+      p(style="text-align:center; margin-top:1em;") Copyright © 2016 by Ged Gonz 
          br
          span(style="text-align:  center; margin-top:0.5em;") BLOGJS
       br
