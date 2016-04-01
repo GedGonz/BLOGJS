@@ -20,7 +20,9 @@ var titlePage=
   listall:"Articulos",
   articlenew:"Nuevo Articulo",
   articledown:"Articulos inactivos",
-  updateart:"Actualizar Articulo"
+  updateart:"Actualizar Articulo",
+  about:"About",
+  Contacto:"Contacto"
 }
 
 
@@ -587,4 +589,17 @@ router.get('/articulo/inactivos', function(req, res, next) {
   
 });
 
+
+//About
+router.get('/welcome/about', function(req, res, next) {
+  res.render('welcome/about', { title: titlePage.about});     
+
+});
+
+
+//About
+router.get('/welcome/contacto', function(req, res, next) {
+  res.render('welcome/contacto', { title: titlePage.Contacto});     
+
+});
 module.exports = router;

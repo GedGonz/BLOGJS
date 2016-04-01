@@ -18,7 +18,10 @@ body {
     padding:0px;
 
 }
-
+.linkabout:hover
+{
+  text-decoration: none;
+}
 .navbar-default .navbar-brand {
    padding-left: 2em;
 }
@@ -29,9 +32,9 @@ body {
     
     margin-top:0.7em;
 }
-.logpage
-{
-  
+.titlePage2 {
+    
+    font-size: 4em;
 }
 
 .textgreen
