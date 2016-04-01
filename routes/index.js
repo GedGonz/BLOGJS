@@ -153,9 +153,12 @@ router.get('/login/new', function(req, res, next) {
 
 });
 
-router.post('/login/save', function(req, res, next) {
+router.post('/login/save',multer({ storage : storage}).single('photo'), function(req, res, next) {
+var datass="./public/uploads/"+nameimage.originalname;
+
 var sessions=req.session.iduser; 
 
+ cloudinary.uploader.upload(datass, function(result) { 
   var data={
 	Nombre:req.body.nombre,
   	Apellido:req.body.apellido,
@@ -164,14 +167,14 @@ var sessions=req.session.iduser;
     Photo:"../../images/Photo.jpg" /*Falta Cargar la Foto desde el controlador*/
   }
 
-  var Usariodata=new shemauser.Usuario(data);
+  var Usuariodata=new shemauser.Usuario(data);
 
 
-  Usariodata.save(function(err)
+  Usuariodata.save(function(err)
   {
   	if(!err)
   	{
-		console.log(Usariodata);
+		console.log(Usuariodata);
      shemauser.Usuario.find({_id:sessions},function(err,User){
        res.render('usuario/login', { title: titlePage.Login,valse:sessions,User:User});
      });
@@ -185,7 +188,7 @@ var sessions=req.session.iduser;
   		
   });
 
-
+});
   
 });
 
@@ -423,7 +426,7 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
             Art[0].Descripcion=req.body.Descripcion;
             Art[0].Cuerpo=req.body.Cuerpo.replace(new RegExp('\n','g'), '<br />').replace(new RegExp('\r','g'), '');
             Art[0].Fecha=fecha;
-            Art[0].Portada="Portada.png";
+            Art[0].Portada="Portada.png";//Falta agregar de Cloudynari
             Art[0].Estado=0;
             Art[0].Usuario=idusuario;
             console.log("Entraron en Condicion: "+req.body.Descripcion);
