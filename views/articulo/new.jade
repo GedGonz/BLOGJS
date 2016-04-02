@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-    if valse && Articulo && User
+    if valse && Articulo && Usuario
        script(src="../../tinymce/tinymce.min.js")
     else
        script(src="../tinymce/tinymce.min.js")
@@ -60,11 +60,11 @@ block content
                    div(class="form-group")
                      div(class="row")
                          div(class="col-md-6")
-                             if valse && Articulo && User
+                             if valse && Articulo && Usuario
                                 input(name="updateart" type="hidden" value=Articulo[0]._id)
                                 input(name="Titulo" type="text" class="form-control" placeholder="Titulo" value= Articulo[0].Titulo)
                                 br
-                                input(name="Autor" type="text" class="form-control" placeholder="Autor" readOnly="readOnly" value= User[0].Nombre+" "+User[0].Apellido)
+                                input(name="Autor" type="text" class="form-control" placeholder="Autor" readOnly="readOnly" value= Usuario[0].Nombre+" "+Usuario[0].Apellido)
                              else
                                 input(name="Titulo" type="text" class="form-control" placeholder="Titulo")
                                 br
@@ -72,7 +72,7 @@ block content
                      br
                      div(class="row")
                          div(class="col-md-12")
-                             if valse && Articulo && User
+                             if valse && Articulo && Usuario
                                 input(name="Descripcion" type="text" class="form-control" placeholder="Descripcion" value= Articulo[0].Descripcion)
                              else
                                 input(name="Descripcion" type="text" class="form-control" placeholder="Descripcion")
@@ -92,7 +92,7 @@ block content
                                    a(id="btnPreview " class="btn btn-primary text-right" OnClick="mostrar();")
                                      <span class="glyphicon glyphicon-eye-open"></span>
                              hr(style="color: black; background-color: black; width:100%;")
-                             if valse && Articulo && User
+                             if valse && Articulo && Usuario
                                img(class="ImageUpload" src="#{Articulo[0].Portada}" id="matrix")
                              else
                                div(class="prevImag text-center" id="prevImag") not Image
@@ -103,14 +103,14 @@ block content
                      br
                      label Cuerpo
                      hr
-                     if valse && Articulo && User
+                     if valse && Articulo && Usuario
                        textarea(name="Cuerpo"  class="form-control" placeholder="Cuerpo") #{Articulo[0].Cuerpo}
                      else
                        textarea(name="Cuerpo"  class="form-control" placeholder="Cuerpo") 
                      br
                      br
                      div(class="form-group text-right")
-                         if valse && Articulo && User
+                         if valse && Articulo && Usuario
                            button(type="submit" class="btn btn-primary ")
                               <span class="glyphicon glyphicon-ok"></span> Update
                          else

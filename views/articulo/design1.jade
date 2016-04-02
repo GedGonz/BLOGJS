@@ -29,8 +29,8 @@ block content
 
 
     div(class="postimage")
-      img(class="Imagarticulo" width="1320" height="850" src="#{Articulo[0].Portada}")
-      h1(class="posttitle ") #{Articulo[0].Titulo}
+      img(class="Imagarticulo" width="1320" height="850" src="#{Article[0].Portada}")
+      h1(class="posttitle ") #{Article[0].Titulo}
     br
     div(class="container")
         
@@ -38,12 +38,12 @@ block content
 
         div(class="row")
           div(class="col-md-2 contsmall")
-            img(class="imagautor" src="#{User[0].Photo}")
+            img(class="imagautor" src="#{Usuario[0].Photo}")
           div(class="col-md-3")
-              h3 #{Articulo[0].Autor}
+              h3 #{Article[0].Autor}
           div(class="col-md-4")
           div(class="col-md-3")
-            div(class="date") #{Articulo[0].Fecha}
+            div(class="date") #{Article[0].Fecha}
         br
         hr(style="color: black; background-color: black; width:100%;")
         br
@@ -53,7 +53,7 @@ block content
         
         div(id="Formcoment0" class="Formcoment0")
           div(class="row")
-             form(action='/articulo/#{Articulo[0]._id}/coment/save/0/0' method='post')
+             form(action='/articulo/#{Article[0]._id}/coment/save/0/0' method='post')
                 div(class="col-md-4")
                    
                    if !valse
@@ -86,9 +86,9 @@ block content
       |  e . innerHTML = input ; 
       |  return e . childNodes . length ===  0  ?  ""  : e . childNodes [ 0 ]. nodeValue ; 
       |}
-      | var cuerpo="#{ Articulo[0].Cuerpo}";
+      | var cuerpo="#{ Article[0].Cuerpo}";
       | var cuerpo =htmlDecode(cuerpo); 
       | $("#cuerpodata").html(cuerpo);
-      | var comentario="#{comentarios}";
+      | var comentario="#{coment}";
       | comentario =htmlDecode(comentario); 
       | $("#cuerpocoment").html(comentario);
