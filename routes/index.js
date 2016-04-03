@@ -141,10 +141,8 @@ router.get('/logouts', function(req, res, next) {
 router.post('/login/count', function(req, res, next) {
  var sessions=req.session.iduser;
 
-  shemauser.Usuario.find(function(err,usuario) {
-     
-    if(usuario[0].Usuario.toLowerCase()==req.body.user.toLowerCase() && usuario[0].Password.toLowerCase()==req.body.pasword.toLowerCase())
-    {
+  shemauser.Usuario.find({Usuario:req.body.user.toLowerCase(),Password:req.body.pasword.toLowerCase()},function(err,usuario) {
+     console.log(usuario);
 
   
      if(usuario.length!=0)
@@ -180,7 +178,7 @@ router.post('/login/count', function(req, res, next) {
             res.render('usuario/login', { title: titlePage.Login,valse:sessions,User:User});
           });
          }
-  }
+  
   });
  
 });
@@ -204,8 +202,8 @@ var sessions=req.session.iduser;
   var data={
 	Nombre:req.body.nombre,
   	Apellido:req.body.apellido,
-  	Usuario:req.body.usuario,
-  	Password:req.body.pasword,
+  	Usuario:req.body.usuario.toLowerCase(),
+  	Password:req.body.pasword.toLowerCase(),
     Photo:result.url //"../../images/Photo.jpg" /*Falta Cargar la Foto desde el controlador*/
   }
   console.log(result);
@@ -496,6 +494,7 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
   	Titulo:req.body.Titulo,
   	Autor:req.body.Autor,
   	Descripcion:req.body.Descripcion,
+    Clasificacion:req.body.Clasificacion,
   	Cuerpo:req.body.Cuerpo.replace(new RegExp('\n','g'), '<br />').replace(new RegExp('\r','g'), ''),
   	Fecha:fecha,
   	Portada:result.url,
@@ -513,6 +512,7 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
             Art[0].Titulo=req.body.Titulo;
             Art[0].Autor=req.body.Autor;
             Art[0].Descripcion=req.body.Descripcion;
+            Art[0].Clasificacion=req.body.Clasificacion;
             Art[0].Cuerpo=req.body.Cuerpo.replace(new RegExp('\n','g'), '<br />').replace(new RegExp('\r','g'), '').replace(new RegExp('<br/>','g'),'');
             Art[0].Fecha=fecha;
             console.log(result.url);

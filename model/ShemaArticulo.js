@@ -7,6 +7,7 @@ var Usuario = mongoose.model('Usuario');
   	Titulo:String,
   	Autor:String,
   	Descripcion:String,
+    Clasificacion:Number,
   	Cuerpo:String,
   	Fecha:String,
   	Portada:String,
