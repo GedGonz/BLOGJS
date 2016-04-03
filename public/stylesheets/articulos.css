@@ -18,7 +18,8 @@
 .ImageUser
 {
     height: 8em;
-    width: 35%
+    width: 35%;
+    border-radius: 50%;
 }
 .ImageUpload
 {

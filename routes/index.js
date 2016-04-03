@@ -518,8 +518,6 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
             }
             Art[0].Estado=0;
             Art[0].Usuario=idusuario;
-            console.log("Entraron en Condicion: "+req.body.Descripcion);
-            console.log(Art);
             Art[0].save(function(err)
             {
               if(!err)
@@ -567,7 +565,9 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
    }
 
   });
-  
+  datass="";
+  nameimage="";
+  console.log("Se limpiaron las variables");
 });
 
 
