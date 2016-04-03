@@ -141,7 +141,12 @@ router.get('/logouts', function(req, res, next) {
 router.post('/login/count', function(req, res, next) {
  var sessions=req.session.iduser;
 
-  shemauser.Usuario.find({Usuario:req.body.user,Password:req.body.pasword},function(err,usuario) {
+  shemauser.Usuario.find(function(err,usuario) {
+     
+    if(usuario[0].Usuario.toLowerCase()==req.body.user.toLowerCase() && usuario[0].Password.toLowerCase()==req.body.pasword.toLowerCase())
+    {
+
+  
      if(usuario.length!=0)
      {
 
@@ -175,7 +180,7 @@ router.post('/login/count', function(req, res, next) {
             res.render('usuario/login', { title: titlePage.Login,valse:sessions,User:User});
           });
          }
-
+  }
   });
  
 });
