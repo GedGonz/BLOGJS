@@ -2,6 +2,10 @@
 logs
 *.log
 npm-debug.log*
+# Modulos
+*.node_modules
+# Config
+*.config
 
 # Runtime data
 pids
