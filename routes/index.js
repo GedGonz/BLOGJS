@@ -29,7 +29,7 @@ var titlePage=
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
      var tipo=file.mimetype;
-     console.log(file.originalname);
+
  if(tipo=='image/png' || tipo=='image/jpg' || tipo=='image/jpeg')
  {
   /*console.log(file.originalname);*/
@@ -125,7 +125,7 @@ router.get('/logouts', function(req, res, next) {
 
   req.session.destroy(function(err) {
   if(err) {
-    console.log(err);
+
   } else {
       shemarticulo.Articulo.find({Estado:0}, function(err,Art) {
             res.render('usuario/login', { title: titlePage.Inicio,Articulos:Art});
@@ -142,7 +142,7 @@ router.post('/login/count', function(req, res, next) {
  var sessions=req.session.iduser;
 
   shemauser.Usuario.find({Usuario:req.body.user.toLowerCase(),Password:req.body.pasword.toLowerCase()},function(err,usuario) {
-     console.log(usuario);
+
 
   
      if(usuario.length!=0)
@@ -206,7 +206,7 @@ var sessions=req.session.iduser;
   	Password:req.body.pasword.toLowerCase(),
     Photo:result.url //"../../images/Photo.jpg" /*Falta Cargar la Foto desde el controlador*/
   }
-  console.log(result);
+
 
   var Usuariodata=new shemauser.Usuario(data);
 
@@ -215,7 +215,7 @@ var sessions=req.session.iduser;
   {
   	if(!err)
   	{
-		console.log(Usuariodata);
+
      shemauser.Usuario.find({_id:sessions},function(err,User){
        res.render('usuario/login', { title: titlePage.Login,valse:sessions,User:User});
      });
@@ -252,7 +252,7 @@ var sessions=req.session.iduser;
         {
          shemauser.Usuario.find({_id:sessions},function(err,User){
           var datahtml=iterahtml(coment,User,req);
-          console.log(User);
+
          res.render('articulo/design1', { title: titlePage.listall,Article: Art,coment: datahtml,valse:sessions,Usuario:User});
        });
 
@@ -385,7 +385,7 @@ router.post('/articulo/:id/coment/save/:padre/:tipo', function(req, res, next) {
     var f=new Date();
     
     var fecha=f.getDay() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
-    console.log("Fecha: "+fecha);
+
 //shemacoment
     var data={
       Nombre: req.body.nombre,
@@ -400,7 +400,7 @@ router.post('/articulo/:id/coment/save/:padre/:tipo', function(req, res, next) {
 
     Comentdata.save(function(err)
     {
-       console.log(Comentdata);
+
         if(!err)
         {
 
@@ -488,7 +488,7 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
   var idusuario=req.session.iduser;
   var datass="./public/uploads/"+nameimage.originalname;
   cloudinary.uploader.upload(datass, function(result) { 
-  console.log(result.url) 
+
   
   var data={
   	Titulo:req.body.Titulo,
@@ -515,10 +515,10 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
             Art[0].Clasificacion=req.body.Clasificacion;
             Art[0].Cuerpo=req.body.Cuerpo.replace(new RegExp('\n','g'), '<br />').replace(new RegExp('\r','g'), '').replace(new RegExp('<br/>','g'),'');
             Art[0].Fecha=fecha;
-            console.log(result.url);
+
             if(result.url)
             {
-              console.log("Entra en Condicion");
+
               Art[0].Portada=result.url;//Falta agregar de Cloudynari
             }
             Art[0].Estado=0;
@@ -572,7 +572,7 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
   });
   datass="";
   nameimage="";
-  console.log("Se limpiaron las variables");
+
 });
 
 
@@ -581,9 +581,9 @@ router.get('/articulo/update/:id', function(req, res, next) {
   var idusuario=req.session.iduser;
   shemarticulo.Articulo.find({_id:req.params.id,Estado:0},function(err,Art) {
       shemauser.Usuario.find({_id:idusuario},function(err,User){
-        console.log(Art[0].Cuerpo);
+
         Art[0].Cuerpo=Art[0].Cuerpo.replace(new RegExp('\n','g'), '<br />').replace(new RegExp('\r','g'), '').replace(new RegExp('<br />','g'),'');
-        console.log(Art[0].Cuerpo);
+
         res.render('articulo/new', { title: titlePage.articlenew,Articulo: Art,valse:idusuario,Usuario:User});
      });
 
