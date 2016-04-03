@@ -18,7 +18,7 @@
 9 verbose stack     at maybeClose (internal/child_process.js:821:16)
 9 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
 10 verbose pkgid blogs@0.0.0
-11 verbose cwd /home/gedgonz/Desktop/ProyectosNodeJS/blogs
+11 verbose cwd /home/gedgonz/Desktop/ProyectosNodeJS/BLOGJS
 12 error Linux 3.13.0-32-generic
 13 error argv "/usr/bin/nodejs" "/usr/bin/npm" "start"
 14 error node v4.3.1
