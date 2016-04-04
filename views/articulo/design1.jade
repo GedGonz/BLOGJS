@@ -50,7 +50,20 @@ block content
 
         div(id="cuerpodata" class="text-justify")
         hr(style="color: black; background-color: black; width:100%;")
-        
+        br
+        h3(class="coment") Articulos Relacionados
+        each clasi in Relacionados
+           br
+           a(href="/article/design/#{clasi._id}")
+              div(class="col-md-3") 
+                div(class="thumbnail thumbnailre")
+                   img(class="Cardarticulo"  src="#{clasi.Portada}")
+                   div(class="caption")
+                    h4 #{clasi.Titulo}
+                    p #{clasi.Descripcion}
+                    p #{clasi.Fecha}
+        br
+        hr(style="color: black; background-color: black; width:100%;")
         div(id="Formcoment0" class="Formcoment0")
           div(class="row")
              form(action='/articulo/#{Article[0]._id}/coment/save/0/0' method='post')
@@ -72,6 +85,7 @@ block content
                 div(class="col-md-4")
                 div(class="col-md-4")
         
+        br
         br
         hr(style="color: black; background-color: black; width:100%;")
         br
