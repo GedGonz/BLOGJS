@@ -15,10 +15,7 @@ font-size:20px;
 }
 
 
-.main-menu:hover,nav.main-menu.expanded {
-width:250px;
-overflow:visible;
-}
+
 
 .main-menu {
 padding-top: 7em;
@@ -29,7 +26,7 @@ top:0;
 bottom:0;
 height:100%;
 left:0;
-width:60px;
+width:250px;
 overflow:hidden;
 -webkit-transition:width .05s linear;
 transition:width .05s linear;
@@ -37,6 +34,16 @@ transition:width .05s linear;
 z-index:1000;
 }
 
+
+@media (max-width: 390px) {
+ .main-menu{
+width:60px;
+}
+ .main-menu:hover,nav.main-menu.expanded {
+width:250px;
+overflow:visible;
+}
+}
 .main-menu>ul {
 margin:7px 0;
 }
