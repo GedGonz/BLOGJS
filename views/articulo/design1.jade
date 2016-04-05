@@ -40,7 +40,7 @@ block content
           div(class="col-md-2 contsmall")
             img(class="imagautor" src="#{Usuario[0].Photo}")
           div(class="col-md-3")
-              h3 #{Article[0].Autor}
+              h3(class="textAuthor") #{Article[0].Autor}
           div(class="col-md-4")
           div(class="col-md-3")
             div(class="date") #{Article[0].Fecha}
@@ -51,8 +51,8 @@ block content
         div(id="cuerpodata" class="text-justify")
         hr(style="color: black; background-color: black; width:100%;")
         br
-        div(class="row round")
-           h3(class="coment") Articulos Relacionados
+        div(class="row")
+           h3(class="textrelacion") Articulos Relacionados
            each clasi in Relacionados
               br
               a(href="/article/design/#{clasi._id}"  title="#{clasi.Titulo}")

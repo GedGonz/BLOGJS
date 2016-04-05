@@ -42,6 +42,20 @@
 	font-size: 1.5em;
 	color: #515151
 }
+.textAuthor
+{
+    font-family: 'Crimson Text', serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #515151
+}
+.textrelacion
+{
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #515151
+}
 #cuerpodata>ul
 {
     font-family: 'Crimson Text', serif;
@@ -87,7 +101,7 @@
 	background-color: #191919;
     position: relative;
     margin-top: 3.7em;
-     box-shadow:inset 0px 5px 8px #000;
+    box-shadow:inset 0px 5px 8px #000;
 }
 
 .posttitle
@@ -143,4 +157,7 @@
     color: #7D7A88;
     cursor:pointer;
 
+}
+.thumbnail>div>h4 {
+    font-weight: bold;
 }
