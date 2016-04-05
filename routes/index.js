@@ -88,6 +88,10 @@ function getFecha(Art,meses) {
    }
 
 }
+
+router.get('/Admin', function(req, res, next) {
+  res.render('welcome/prueba');
+});
 /* GET home page. */
 router.get('/', function(req, res, next) {
       var sessions=req.session.iduser;
@@ -440,15 +444,8 @@ router.post('/articulo/:id/coment/save/:padre/:tipo', function(req, res, next) {
                    });
 
                        // getFecha(Art,meses);
-                
 
                 });
-
-
-
-           
-           
-
 
         }
         else

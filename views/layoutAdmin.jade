@@ -1,0 +1,115 @@
+doctype html
+html
+  head
+    title= title
+
+link(href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css")
+link(href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css")
+link(rel='stylesheet', href='/stylesheets/articulos.css')
+link(rel='stylesheet', href='/stylesheets/style.css')
+link(href="stylesheets/siebar.css" rel="stylesheet" type="text/css")
+script(src='/javascripts/jquery.min.js')
+script(src='/javascripts/bootstrap.min.js')
+script(src='/javascripts/jsBrowser.js')
+
+
+script
+  |$(document).ready(function(){
+  |    $(".link1").css("border-bottom", "3px solid #9CCB3B");
+  |    $(".link1").on("click",function(){
+  |        $(".link1").css("border-bottom", "3px solid #9CCB3B");
+  |        $(".link1").css("color", "white");
+  |        $(".link2").css("border-bottom", "");
+  |        $(".link3").css("border-bottom", "");
+  |        $(".link4").css("border-bottom", "");
+  |    });
+  |    $(".link2").on("click",function(){
+  |        $(".link2").css("border-bottom", "3px solid #9CCB3B");
+  |        $(".link2").css("color", "white");
+  |        $(".link1").css("border-bottom", "");
+  |        $(".link3").css("border-bottom", "");
+  |        $(".link4").css("border-bottom", "");
+  |    });
+  |    $(".link3").on("click",function(){
+  |        $(".link3").css("border-bottom", "3px solid #9CCB3B");
+  |        $(".link3").css("color", "white");
+  |        $(".link4").css("border-bottom", "");
+  |        $(".link1").css("border-bottom", "");
+  |        $(".link2").css("border-bottom", "");
+  |    });
+  |    $(".link4").on("click",function(){
+  |        $(".link4").css("border-bottom", "3px solid #9CCB3B");
+  |        $(".link4").css("color", "white");
+  |        $(".link1").css("border-bottom", "");
+  |        $(".link2").css("border-bottom", "");
+  |        $(".link3").css("border-bottom", "");
+  |    });
+  |});
+header
+  av(class="navbar navbar-default")
+     div(class="container-fluid")
+     div(class="navbar-header")
+         a(class="navbar-brand" href="/")
+             div(class="titlePage" title="BLOGJS")
+                img(src="http://res.cloudinary.com/gedgonz/image/upload/c_scale,w_28/v1459537935/OC-Blog_pqzh4t.png")
+                span(class="textblue") BLOG
+                   span(class="textgreen") JS
+         button(type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse")
+             span(class="sr-only") Desplegar navegación
+             span(class="icon-bar")
+             span(class="icon-bar")
+             span(class="icon-bar")
+
+     div(class="collapse navbar-collapse navbar-ex1-collapse")
+       
+
+  br
+  br
+  nav(class="main-menu")
+    ul
+      li
+        a(href="#")
+          i(class="fa fa-home fa-2x")
+          span(class="nav-text") Dashboard
+      li(class="has-subnav")
+        a(href="#")
+          i(class="fa fa-laptop fa-2x")
+          span(class="nav-text")  UI Components
+      li(class="has-subnav")
+        a(href="#")
+          i(class="fa fa-list fa-2x")
+          span(class="nav-text") Forms
+      li(class="has-subnav")
+        a(href="#")
+          i(class="fa fa-folder-open fa-2x")
+          span(class="nav-text") Pages
+      li
+        a(href="#")
+          i(class="fa fa-bar-chart-o fa-2x")
+          span(class="nav-text") Graphs and Statistics
+      li
+        a(href="#")
+          i(class="fa fa-font fa-2x")
+          span(class="nav-text") Typography and Icons
+      li
+        a(href="#")
+          i(class="fa fa-table fa-2x")
+          span(class="nav-text") Tables
+      li
+        a(href="#")
+          i(class="fa fa-map-marker fa-2x")
+          span(class="nav-text") Maps
+      li
+        a(href="#")
+          i(class="fa fa-info fa-2x")
+          span(class="nav-text")  Documentation
+
+    ul(class="logout")
+        li
+          a(href="#")
+            i(class="fa fa-power-off fa-2x")
+            span(class="nav-text") Logout
+
+
+  div(class="container")
+     block content
