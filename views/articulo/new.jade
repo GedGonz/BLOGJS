@@ -52,7 +52,7 @@ block content
 
          div(class="col-sm-3 col-md-1")
          div(class="col-sm-6 col-md-10")
-               div(class="coment") Gestion de Nuevo Articulo
+               div(class="coment") Nuevo Articulo
                hr(style="color: black; background-color: black; width:100%;")
                br
                br
@@ -207,15 +207,15 @@ block content
                                   a(id="FileNameSelect"  href="#" class="close fileupload-exists"   data-dismiss="fileupload" style="float: none") x
                              div(class="col-md-6")
                              div(class="col-md-2")
-                                   a(id="btnPreview " class="btn btn-primary text-right" OnClick="mostrar();")
-                                     <span class="glyphicon glyphicon-eye-open"></span>
-                             hr(style="color: black; background-color: black; width:100%;")
-                             if valse && Articulo && Usuario
-                               img(class="ImageUpload" src="#{Articulo[0].Portada}" id="matrix")
-                             else
-                               div(class="prevImag text-center" id="prevImag") not Image
-                               img(class="ImageUpload" src="" alt="" id="matrix")
-                             hr(style="color: black; background-color: black; width:100%;")
+                                a(id="btnPreview " class="btn btn-primary text-right" OnClick="mostrar();")
+                                  span(class="glyphicon glyphicon-eye-open")
+                     hr(style="color: black; background-color: black; width:100%;")
+                     if valse && Articulo && Usuario
+                       img(class="ImageUpload" src="#{Articulo[0].Portada}" id="matrix")
+                     else
+                       div(class="prevImag text-center" id="prevImag") not Image
+                       img(class="ImageUpload" src="" alt="" id="matrix")
+                     hr(style="color: black; background-color: black; width:100%;")
                              
 
                      br
