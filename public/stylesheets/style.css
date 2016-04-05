@@ -30,6 +30,10 @@ body {
     padding:0px;
 
 }
+.round
+{
+    border-radius: 50%;
+}
 .linkabout:hover
 {
   text-decoration: none;

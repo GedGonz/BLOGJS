@@ -251,16 +251,19 @@ var sessions=req.session.iduser;
 
         if(sessions)
         {
-         shemauser.Usuario.find({_id:sessions},function(err,User){
-          var datahtml=iterahtml(coment,User,req);
+         shemarticulo.Articulo.find({_id:{ '$ne': req.params.id },Estado:0,Clasificacion:Art[0].Clasificacion},function(err,clasif) {
+           getFecha(clasif,meses);
+           shemauser.Usuario.find({_id:sessions},function(err,User){
+           var datahtml=iterahtml(coment,User,req);
          
-         res.render('articulo/design1', { title: titlePage.listall,Article: Art,coment: datahtml,valse:sessions,Usuario:User});
-       });
-
+            res.render('articulo/design1', { title: titlePage.listall,Article: Art,Relacionados:clasif,coment: datahtml,valse:sessions,Usuario:User});
+          });
+         });
         }
         else
         {
         shemarticulo.Articulo.find({_id:{ '$ne': req.params.id },Estado:0,Clasificacion:Art[0].Clasificacion},function(err,clasif) {
+           getFecha(clasif,meses);
            shemauser.Usuario.find({_id:Art[0].Usuario},function(err,User){
             var datahtml=iterahtml(coment,User,req);
 
