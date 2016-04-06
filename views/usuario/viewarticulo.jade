@@ -26,83 +26,85 @@ block content
      |      return false;
      |  }
 
-
-    div(class="postimage")
-      img(class="Imagarticulo" width="1320" height="850" src="#{Article[0].Portada}")
-      h1(class="posttitle") #{Article[0].Titulo}
-    br
-    div(class="container")
-        
-        br
-
-        div(class="row")
-          div(class="col-md-2 contsmall")
-            img(class="imagautor" src="#{Usuario[0].Photo}")
-          div(class="col-md-3")
-              h3(class="textAuthor") #{Article[0].Autor}
-          div(class="col-md-4")
-          div(class="col-md-3")
-            div(class="date") #{Article[0].Fecha}
-        br
-        hr(style="color: black; background-color: black; width:100%;")
-        br
-
-        div(id="cuerpodata" class="text-justify")
-        hr(style="color: black; background-color: black; width:100%;")
-        br
-        div(class="row")
-           h3(class="textrelacion") Articulos Relacionados
-           each clasi in Relacionados
-              br
-              a(href="/article/design/#{clasi._id}"  title="#{clasi.Titulo}")
-                 div(class="col-md-3") 
-                   div(class="thumbnail thumbnailre")
-                      img(class="Cardarticulo"  src="#{clasi.Portada}")
-                      div(class="caption")
-                       h4 #{clasi.Titulo}
-                       p #{clasi.Descripcion}
-                       p #{clasi.Fecha}
-        br
-        hr(style="color: black; background-color: black; width:100%;")
-        div(id="Formcoment0" class="Formcoment0")
-          div(class="row")
-             form(action='/articulo/#{Article[0]._id}/coment/save/0/0' method='post')
-                div(class="col-md-4")
-                   
-                   if !valse
-                     h3(class="coment") Comentar
-                     br
-                     br
-                     div(class="form-group")
-                        input(name="nombre" class="form-control" type="text" placeholder="Nombre")
-                        textarea(name="comentario" class="form-control" type="text" placeholder="Comentario")
-                     div(class="form-group")
-                        button(class="btn btn-default") Enviar
-                   else
-                     h3(class="coment") Comentarios
-                     br
-                     br                
-                div(class="col-md-4")
-                div(class="col-md-4")
-        
-        br
-        br
-        hr(style="color: black; background-color: black; width:100%;")
-        br
-        div(id="cuerpocoment")
-        br
-        br
-
-
-    script
-      |function htmlDecode ( input ){ 
-      |  var e = document . createElement ( 'div' ); 
-      |  e . innerHTML = input ; 
-      |  return e . childNodes . length ===  0  ?  ""  : e . childNodes [ 0 ]. nodeValue ; 
-      |}
-      | var cuerpo="#{ Article[0].Cuerpo}";
-      | var cuerpo =htmlDecode(cuerpo); 
-      | $("#cuerpodata").html(cuerpo);
-      | var comentario="#{coment}";
-      | comentario =htmlDecode(comentario); 
-      | $("#cuerpocoment").html(comentario);
+    div(class="container marginleft")
+       div(class="postimage")
+         img(class="Imagarticulo" width="1320" height="850" src="#{Article[0].Portada}")
+         h1(class="posttitle") #{Article[0].Titulo}
+       br
+       div(class="container")
+           
+           br
+   
+           div(class="row")
+             div(class="col-md-2 contsmall")
+               img(class="imagautor" src="#{Usuario[0].Photo}")
+             div(class="col-md-3")
+                 h3(class="textAuthor") #{Article[0].Autor}
+             div(class="col-md-4")
+             div(class="col-md-3")
+               div(class="date") #{Article[0].Fecha}
+           br
+           hr(style="color: black; background-color: black; width:100%;")
+           br
+   
+           div(id="cuerpodata" class="text-justify")
+           hr(style="color: black; background-color: black; width:100%;")
+           br
+           div(class="row")
+              h3(class="textrelacion") Articulos Relacionados
+              each clasi in Relacionados
+                 br
+                 a(href="/article/design/#{clasi._id}"  title="#{clasi.Titulo}")
+                    div(class="col-md-3") 
+                      div(class="thumbnail thumbnailre")
+                         img(class="Cardarticulo"  src="#{clasi.Portada}")
+                         div(class="caption")
+                          h4 #{clasi.Titulo}
+                          p #{clasi.Descripcion}
+                          p #{clasi.Fecha}
+           br
+           hr(style="color: black; background-color: black; width:100%;")
+           div(id="Formcoment0" class="Formcoment0")
+             div(class="row")
+                form(action='/articulo/#{Article[0]._id}/coment/save/0/0' method='post')
+                   div(class="col-md-4")
+                      
+                      if !valse
+                        h3(class="coment") Comentar
+                           i(class="fa fa-comments fa-1x")
+                        br
+                        br
+                        div(class="form-group")
+                           input(name="nombre" class="form-control" type="text" placeholder="Nombre")
+                           textarea(name="comentario" class="form-control" type="text" placeholder="Comentario")
+                        div(class="form-group")
+                           button(class="btn btn-default") Enviar
+                      else
+                        h3(class="coment") Comentarios
+                           i(class="fa fa-comments fa-1x")
+                        br
+                        br                
+                   div(class="col-md-4")
+                   div(class="col-md-4")
+           
+           br
+           br
+           hr(style="color: black; background-color: black; width:100%;")
+           br
+           div(id="cuerpocoment")
+           br
+           br
+   
+   
+       script
+         |function htmlDecode ( input ){ 
+         |  var e = document . createElement ( 'div' ); 
+         |  e . innerHTML = input ; 
+         |  return e . childNodes . length ===  0  ?  ""  : e . childNodes [ 0 ]. nodeValue ; 
+         |}
+         | var cuerpo="#{ Article[0].Cuerpo}";
+         | var cuerpo =htmlDecode(cuerpo); 
+         | $("#cuerpodata").html(cuerpo);
+         | var comentario="#{coment}";
+         | comentario =htmlDecode(comentario); 
+         | $("#cuerpocoment").html(comentario);
