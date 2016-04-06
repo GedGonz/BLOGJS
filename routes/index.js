@@ -191,12 +191,54 @@ router.post('/login/count', function(req, res, next) {
  
 });
 
+//Ruta de forget email
+router.post('/login/forget', function(req, res, next) {
+   var sessions=req.session.iduser; 
+  /******************************/
+   //Envio de Correo
+
+   smtpTransport.sendMail({ 
+      from :  "BLOGJS < InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
+      to :  req.body.email,  // lista separada por comas de los receptores 
+      subject :  "Hola " ,  // línea de asunto 
+      text :  "Se te olvido la Contraseña!! \n\n Descuida esta es tu nueva Contraseña: 123"  // cuerpo de texto 
+   }, function (error , response) { 
+      if( error ) { 
+          console.log (error); 
+      } else { 
+          console.log ( "Mensaje enviado:"  + response.message ); 
+          res.render('/', { title: titlePage.LoginUp,valse:sessions,Usuario:User});
+      } 
+   });
+
+  /*******************************/
+  res.render('welcome/prueba');
+});
 
 //Ruta de LoginUp
 router.get('/login/new', function(req, res, next) {
   var sessions=req.session.iduser; 
     shemauser.Usuario.find({_id:sessions},function(err,User){
     res.render('usuario/loginup', { title: titlePage.LoginUp,valse:sessions,User:User});
+  });
+
+});
+
+//Ruta de forget
+router.get('/login/forget', function(req, res, next) {
+  var sessions=req.session.iduser; 
+    shemauser.Usuario.find({_id:sessions},function(err,User){
+      console.log(User);
+    res.render('usuario/forget', { title: titlePage.LoginUp,valse:sessions,Usuario:User});
+  });
+
+});
+
+//Ruta de forget
+router.get('/login/update', function(req, res, next) {
+  var sessions=req.session.iduser; 
+    shemauser.Usuario.find({_id:sessions},function(err,User){
+    res.render('usuario/update', { title: titlePage.LoginUp,valse:sessions,Usuario:User});
   });
 
 });
@@ -215,45 +257,75 @@ var sessions=req.session.iduser;
   	Password:req.body.pasword.toLowerCase(),
     Photo:result.url //"../../images/Photo.jpg" /*Falta Cargar la Foto desde el controlador*/
   }
+  var valupdate=req.body.updateuser;
+  if(valupdate)
+   {
+       var Usuariodata=new shemauser.Usuario(data);
+       shemauser.Usuario.find({_id:idusuario},function(err,User){
+          User[0].Nombre=req.body.nombre;
+          User[0].Apellido=req.body.apellido;
+          User[0].Email=req.body.email;
+          User[0].Usuario=req.body.usuario.toLowerCase();
+          User[0].Password=req.body.pasword.toLowerCase();
+          if(result.url)
+            {
+              User[0].Photo=req.body.nombre;
+            }
+            Usuariodata.save(function(err)
+              {
+               if(!err)
+               {
+                 shemauser.Usuario.find({_id:sessions},function(err,User){
+                   res.render('/', { title: titlePage.Login,valse:sessions,Usuario:User});
+                 });
+               }
+               else
+               {
+                 shemauser.Usuario.find({_id:sessions},function(err,User){
+                   res.render('/login/update', { title: titlePage.LoginUp,valse:sessions,Usuario:User});
+                 });
+               }
+                 
+              });
 
+       });
+   }
+   else
+   {
+     Usuariodata.save(function(err)
+     {
+     	if(!err)
+     	{
+         /******************************/
+         //Envio de Correo
 
-  var Usuariodata=new shemauser.Usuario(data);
+         smtpTransport.sendMail({ 
+            from :  "BLOGJS < InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
+            to :  req.body.email,  // lista separada por comas de los receptores 
+            subject :  "Hola " ,  // línea de asunto 
+            text :  "Bienvenido a BLOGJS!!"  // cuerpo de texto 
+         }, function (error , response) { 
+            if( error ) { 
+                console.log (error); 
+            } else { 
+                console.log ( "Mensaje enviado:"  + response.message ); 
+            } 
+         });
 
-
-  Usuariodata.save(function(err)
-  {
-  	if(!err)
-  	{
-      /******************************/
-      //Envio de Correo
-
-      smtpTransport.sendMail({ 
-         from :  "BLOGJS < InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
-         to :  req.body.email,  // lista separada por comas de los receptores 
-         subject :  "Hola " ,  // línea de asunto 
-         text :  "Bienvenido a BLOGJS!!"  // cuerpo de texto 
-      }, function (error , response) { 
-         if( error ) { 
-             console.log (error); 
-         } else { 
-             console.log ( "Mensaje enviado:"  + response.message ); 
-         } 
-      });
-
-     /*******************************/
-     shemauser.Usuario.find({_id:sessions},function(err,User){
-       res.render('usuario/login', { title: titlePage.Login,valse:sessions,User:User});
+        /*******************************/
+        shemauser.Usuario.find({_id:sessions},function(err,User){
+          res.render('usuario/login', { title: titlePage.Login,valse:sessions,User:User});
+        });
+     	}
+     	else
+     	{
+        shemauser.Usuario.find({_id:sessions},function(err,User){
+          res.render('usuario/loginup', { title: titlePage.LoginUp,valse:sessions,User:User});
+        });
+     	}
+     		
      });
-  	}
-  	else
-  	{
-     shemauser.Usuario.find({_id:sessions},function(err,User){
-       res.render('usuario/loginup', { title: titlePage.LoginUp,valse:sessions,User:User});
-     });
-  	}
-  		
-  });
-
+}
 });
   
 });

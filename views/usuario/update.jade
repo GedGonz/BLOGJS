@@ -1,0 +1,64 @@
+extends ../layoutAdmin
+
+block content
+   script
+    | var nval=false;
+    | /*Hace una Previsualizacion de la imagen antes de cargarla*/
+    |   function mostrar()
+    |   {
+    |     var input = document.getElementById("PhotoUser");
+    |     var fReader = new FileReader();
+    |       fReader.readAsDataURL(input.files[0]);
+    |       fReader.onloadend = function(event){
+    |       var img = document.getElementById("matrix");
+    |       img.src = event.target.result;
+    |       $('#imagenUser').show();
+    |       nval=true;
+    |         }
+    |     return false
+    | }
+   div(class="container")
+
+      div(class="row margin")
+         
+         div(class="col-sm-3 col-md-4")
+         div(class="col-sm-6 col-md-4")
+            div(class="titulologin text-center")
+               h3(class="titlelogin") Update-
+                 span(class="spaner") User
+               div(class="borde")
+               br
+               br
+            form(method='POST', action='/login/save', enctype='multipart/form-data')
+                div(class="form-group")
+                   div(class="contentimag text-center" id="imagenUser")
+                     img(class="ImageUser" name="photo" src=Usuario[0].Photo alt="" id="matrix" )
+                   br
+                   input(name="updatuser" type="hidden" value=Usuario[0]._id)
+                   input(name="nombre" type="text" class="form-control" placeholder="Name" value=Usuario[0].Nombre)
+                   br
+                   input(name="apellido" type="text" class="form-control" placeholder="Lasname" value=Usuario[0].Apellido)
+                   br
+                   input(name="email" type="eamil" class="form-control" placeholder="Email" value=Usuario[0].Email)
+                   br
+                   input(name="usuario" type="text" class="form-control" placeholder="Username" value=Usuario[0].Usuario)
+                   br
+                   input(name="pasword" type="password" class="form-control" placeholder="Password" value=Usuario[0].Password)
+                   br
+
+                   div(class="fileupload fileupload-new" data-provides="fileupload")
+                      span(class="btn btn-default btn-file") 
+                        span(class="fileupload-new") Photo
+                        span(class="fileupload-exists") Change
+                        input(id="PhotoUser" name="PhotoUser"  type="file")
+                      span(class="fileupload-preview margin-left")
+                      a(id="FileNameSelect"  href="#" class="close fileupload-exists"  data-dismiss="fileupload" style="float: none") x
+                   a(id="btnPreview " for="Vista Previa" class="btn btn-primary text-right" OnClick="mostrar();")
+                     span(class="glyphicon glyphicon-eye-open")
+                   br
+                   br
+                   div(class="form-group")
+                      button(type="submit" class="btn btn-success btn-group-justified") Update
+
+                      button(class="btn btn-danger btn-group-justified") Cancel
+         div(class="col-sm-3 col-md-4")

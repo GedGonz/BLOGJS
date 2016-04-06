@@ -1,0 +1,23 @@
+extends ../layoutAdmin
+
+block content
+   div(class="container marginleft")
+
+      div(class="row margin")
+         
+         div(class="col-sm-3 col-md-3")
+         div(class="col-sm-6 col-md-6")
+            div(class="panel")
+               div(class="titulologin text-center")
+                  h3(class="titlelogin") Recuperar-
+                    span(class="spaner") Password
+                  div(class="borde")
+                  br
+                  br
+               form(method='POST', action='/login/forget')
+                   div(class="form-group")
+                      input(name="email" type="email" class="form-control" placeholder="Email")
+                      br
+                   div(class="form-group")
+                       button(type="submit" class="btn btn-success btn-group-justified") Enviar
+         div(class="col-sm-3 col-md-3")
