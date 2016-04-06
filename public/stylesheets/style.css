@@ -36,7 +36,7 @@ body {
   text-decoration: none;
 }
 .navbar-default .navbar-brand {
-   padding-left: 2em;
+   padding-left: 3.5em;
 }
 .navbar-brand>img {
     display: inline;
@@ -180,16 +180,7 @@ z-index: 1001;
   line-height: 20px;
   display: block;
 }
-.photoUser
-{
-  margin-left: 3em;
-  margin-top: 0.4em;
-  height:3em;
-  width: 3em;
-  border-radius: 50%;
-  line-height: 20px;
-  display: block;
-}
+
 
  nav.sidebar, .main{
     -webkit-transition: margin 200ms ease-out;
