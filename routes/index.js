@@ -92,9 +92,7 @@ function getFecha(Art,meses) {
 
 }
 
-router.get('/Admin', function(req, res, next) {
-  res.render('welcome/prueba');
-});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
       var sessions=req.session.iduser;
