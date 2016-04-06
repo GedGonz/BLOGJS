@@ -5,6 +5,9 @@ var router = express.Router();
 var shemauser=require('../model/ShemaUsuario');
 var shemarticulo=require('../model/ShemaArticulo');
 var shemacoment=require('../model/ShemaComentario');
+var smtpTransport=require('../config/email').smtpTransport;
+
+
 var entra=true;
 var html="";
 var value="";
@@ -205,8 +208,9 @@ var sessions=req.session.iduser;
 
  cloudinary.uploader.upload(datass, function(result) { 
   var data={
-	Nombre:req.body.nombre,
+	  Nombre:req.body.nombre,
   	Apellido:req.body.apellido,
+    Email:req.body.email,
   	Usuario:req.body.usuario.toLowerCase(),
   	Password:req.body.pasword.toLowerCase(),
     Photo:result.url //"../../images/Photo.jpg" /*Falta Cargar la Foto desde el controlador*/
@@ -220,7 +224,23 @@ var sessions=req.session.iduser;
   {
   	if(!err)
   	{
+      /******************************/
+      //Envio de Correo
 
+      smtpTransport.sendMail({ 
+         from :  "BLOGJS < InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
+         to :  req.body.email,  // lista separada por comas de los receptores 
+         subject :  "Hola " ,  // línea de asunto 
+         text :  "Bienvenido a BLOGJS!!"  // cuerpo de texto 
+      }, function (error , response) { 
+         if( error ) { 
+             console.log (error); 
+         } else { 
+             console.log ( "Mensaje enviado:"  + response.message ); 
+         } 
+      });
+
+     /*******************************/
      shemauser.Usuario.find({_id:sessions},function(err,User){
        res.render('usuario/login', { title: titlePage.Login,valse:sessions,User:User});
      });
