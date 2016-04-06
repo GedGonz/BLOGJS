@@ -227,7 +227,10 @@ z-index: 1001;
     nav.sidebar .navbar-nav > li{
       border-bottom: 1px #e5e5e5 solid;
     }
-
+   .dropdown-menu
+   {
+      background-color:#273B47 ;
+   }
     nav.sidebar .navbar-nav .open .dropdown-menu {
       position: static;
       float: none;

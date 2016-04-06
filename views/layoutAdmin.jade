@@ -88,10 +88,20 @@ html
               a(href="#")
                 i(class="fa fa-bar-chart-o fa-2x")
                 span(class="nav-text") Statisticas
-            li(class="has-subnav")
-              a(href="#")
+
+            li(class="dropdown")
+              a(class="dropdown-toggle" data-toggle="dropdown" href="#")
                 i(class="fa fa-user fa-2x")
                 span(class="nav-text")  Usuario
+              ul(class="dropdown-menu")
+                li
+                  a(href="/login/update")
+                    i(class="fa fa-eyedropper fa-2x")
+                    span(class="nav-text") Update
+                li
+                  a(href="/login/forget")
+                    i(class="fa fa-unlock-alt fa-2x")
+                    span(class="nav-text") forget
    
           ul(class="logout border-top")
               li
