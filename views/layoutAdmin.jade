@@ -3,114 +3,100 @@ html
   head
     title= title
 
-link(href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css")
-link(href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css")
-link(rel='stylesheet', href='/stylesheets/articulos.css')
-link(rel='stylesheet', href='/stylesheets/style.css')
-link(href="/stylesheets/siebar.css" rel="stylesheet" type="text/css")
-script(src='/javascripts/jquery.min.js')
-script(src='/javascripts/bootstrap.min.js')
-script(src='/javascripts/jsBrowser.js')
+  link(href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css")
+  link(href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css")
+  link(rel='stylesheet', href='/stylesheets/articulos.css')
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  link(href="/stylesheets/siebar.css" rel="stylesheet" type="text/css")
+  link(rel='stylesheet', href='/stylesheets/cssBrowser.css')
+  script(src='/javascripts/jquery.min.js')
+  script(src='/javascripts/bootstrap.min.js')
+  script(src='/javascripts/jsBrowser.js')
 
 
-script
-  |$(document).ready(function(){
-  |    $(".link1").css("border-bottom", "3px solid #9CCB3B");
-  |    $(".link1").on("click",function(){
-  |        $(".link1").css("border-bottom", "3px solid #9CCB3B");
-  |        $(".link1").css("color", "white");
-  |        $(".link2").css("border-bottom", "");
-  |        $(".link3").css("border-bottom", "");
-  |        $(".link4").css("border-bottom", "");
-  |    });
-  |    $(".link2").on("click",function(){
-  |        $(".link2").css("border-bottom", "3px solid #9CCB3B");
-  |        $(".link2").css("color", "white");
-  |        $(".link1").css("border-bottom", "");
-  |        $(".link3").css("border-bottom", "");
-  |        $(".link4").css("border-bottom", "");
-  |    });
-  |    $(".link3").on("click",function(){
-  |        $(".link3").css("border-bottom", "3px solid #9CCB3B");
-  |        $(".link3").css("color", "white");
-  |        $(".link4").css("border-bottom", "");
-  |        $(".link1").css("border-bottom", "");
-  |        $(".link2").css("border-bottom", "");
-  |    });
-  |    $(".link4").on("click",function(){
-  |        $(".link4").css("border-bottom", "3px solid #9CCB3B");
-  |        $(".link4").css("color", "white");
-  |        $(".link1").css("border-bottom", "");
-  |        $(".link2").css("border-bottom", "");
-  |        $(".link3").css("border-bottom", "");
-  |    });
-  |});
-header
-  
+  script
+    |$(document).ready(function(){
+    |    $(".link1").css("border-bottom", "3px solid #9CCB3B");
+    |    $(".link1").on("click",function(){
+    |        $(".link1").css("border-bottom", "3px solid #9CCB3B");
+    |        $(".link1").css("color", "white");
+    |        $(".link2").css("border-bottom", "");
+    |        $(".link3").css("border-bottom", "");
+    |        $(".link4").css("border-bottom", "");
+    |    });
+    |    $(".link2").on("click",function(){
+    |        $(".link2").css("border-bottom", "3px solid #9CCB3B");
+    |        $(".link2").css("color", "white");
+    |        $(".link1").css("border-bottom", "");
+    |        $(".link3").css("border-bottom", "");
+    |        $(".link4").css("border-bottom", "");
+    |    });
+    |    $(".link3").on("click",function(){
+    |        $(".link3").css("border-bottom", "3px solid #9CCB3B");
+    |        $(".link3").css("color", "white");
+    |        $(".link4").css("border-bottom", "");
+    |        $(".link1").css("border-bottom", "");
+    |        $(".link2").css("border-bottom", "");
+    |    });
+    |    $(".link4").on("click",function(){
+    |        $(".link4").css("border-bottom", "3px solid #9CCB3B");
+    |        $(".link4").css("color", "white");
+    |        $(".link1").css("border-bottom", "");
+    |        $(".link2").css("border-bottom", "");
+    |        $(".link3").css("border-bottom", "");
+    |    });
+    |});
+  header
 
-body
-  nav(class="navbar navbar-default navg")
-     div(class="container-fluid")
-     div(class="navbar-header")
-         a(class="navbar-brand" href="/")
-             div(class="titlePage" title="BLOGJS")
-                img(src="http://res.cloudinary.com/gedgonz/image/upload/c_scale,w_28/v1459537935/OC-Blog_pqzh4t.png")
-                span(class="textblue") BLOG
-                   span(class="textgreen") JS
-     div(class="collapse navbar-collapse navbar-ex1-collapse")
-       ul(class="nav navbar-nav navbar-center")
-          li
-            p(class="nameuser") Admin User      
-
-  br
-  br
-  div(class="col-md-3")  
-     nav(class="main-menu")
-       div(class="border-button dashuser")
-         img(class="photoUser" src="http://res.cloudinary.com/gedgonz/image/upload/v1459661223/wmdpvltesx95fkcudmxa.jpg")
-         span Gerald Gonzalez
-       ul
-         li
-           a(href="#")
-             i(class="fa fa-home fa-2x")
-             span(class="nav-text") Dashboard
-         li(class="has-subnav")
-           a(href="#")
-             i(class="fa fa-laptop fa-2x")
-             span(class="nav-text")  UI Components
-         li(class="has-subnav")
-           a(href="#")
-             i(class="fa fa-list fa-2x")
-             span(class="nav-text") Forms
-         li(class="has-subnav")
-           a(href="#")
-             i(class="fa fa-folder-open fa-2x")
-             span(class="nav-text") Pages
-         li
-           a(href="#")
-             i(class="fa fa-bar-chart-o fa-2x")
-             span(class="nav-text") Graphs and Statistics
-         li
-           a(href="#")
-             i(class="fa fa-font fa-2x")
-             span(class="nav-text") Typography and Icons
-         li
-           a(href="#")
-             i(class="fa fa-table fa-2x")
-             span(class="nav-text") Tables
-         li
-           a(href="#")
-             i(class="fa fa-map-marker fa-2x")
-             span(class="nav-text") Maps
-         li
-           a(href="#")
-             i(class="fa fa-info fa-2x")
-             span(class="nav-text")  Documentation
-
-       ul(class="logout border-top")
-           li
-             a(href="#")
-               i(class="fa fa-power-off fa-2x")
-               span(class="nav-text") Logout
-  div(class="col-md-9 marginleft")  
-     block content
+     nav(class="navbar navbar-default navg")
+        div(class="container-fluid")
+        div(class="navbar-header")
+            a(class="navbar-brand" href="/")
+                div(class="titlePage" title="BLOGJS")
+                   img(src="http://res.cloudinary.com/gedgonz/image/upload/c_scale,w_28/v1459537935/OC-Blog_pqzh4t.png")
+                   span(class="textblue") BLOG
+                      span(class="textgreen") JS
+        div(class="collapse navbar-collapse navbar-ex1-collapse")
+          ul(class="nav navbar-nav navbar-center")
+             li
+               p(class="nameuser")  
+     br
+     br
+     div(class="col-md-3")  
+        nav(class="main-menu")
+          div(class="border-button dashuser")
+             img(class="photoUser" src="http://res.cloudinary.com/gedgonz/image/upload/v1457199149/iconcoment3_ht4e4a.png") 
+             p(class="nameuser") #{Usuario[0].Nombre+" "+Usuario[0].Apellido}
+          ul
+            li
+              a(href="/")
+                i(class="fa fa-home fa-2x")
+                span(class="nav-text") Home
+            li
+              a(href="/articulo/new")
+                i(class="fa fa-font fa-2x")
+                span(class="nav-text") Nuevo Articulo
+            li(class="has-subnav")
+              a(href="/")
+                i(class="fa fa-list fa-2x")
+                span(class="nav-text") Activos
+            li(class="has-subnav")
+              a(href="/articulo/inactivos")
+                i(class="fa fa-list fa-2x")
+                span(class="nav-text") Inactivos
+            li
+              a(href="#")
+                i(class="fa fa-bar-chart-o fa-2x")
+                span(class="nav-text") Statisticas
+            li(class="has-subnav")
+              a(href="#")
+                i(class="fa fa-user fa-2x")
+                span(class="nav-text")  Usuario
+   
+          ul(class="logout border-top")
+              li
+                a(href="/logouts")
+                  i(class="fa fa-power-off fa-2x")
+                  span(class="nav-text") Logout
+  body
+      block content

@@ -1,4 +1,4 @@
-extends ../layout
+extends ../layoutAdmin
 
 block content
     if valse && Articulo && Usuario
@@ -45,198 +45,196 @@ block content
        |         }
        |     return false
        | }
+    div(class="container marginleft")
+       div(class="row margin")
+   
+          div(class="col-sm-3 col-md-1")
+          div(class="col-sm-6 col-md-10")
+                div(class="coment") Nuevo Articulo
+                hr(style="color: black; background-color: black; width:100%;")
+                br
+                br
+                form(method='POST', action='/articulo/save', enctype='multipart/form-data')
+                    div(class="form-group")
+                      div(class="row")
+                          div(class="col-md-6")
+                              if valse && Articulo && Usuario
+                                 input(name="updateart" type="hidden" value=Articulo[0]._id)
+                                 input(name="Titulo" type="text" class="form-control" placeholder="Titulo" value= Articulo[0].   Titulo)
+                                 br
+                                 input(name="Autor" type="text" class="form-control" placeholder="Autor" readOnly="readOnly"    value= Usuario[0].Nombre+" "+Usuario[0].Apellido)
+                                 br
+                                 label Categoria
+                                 select(name="Clasificacion" class="form-control")
+                                    option(value="0" ) Seleccione
+                                    if Articulo[0].Clasificacion==1
+                                       option(value="1" selected) Tecnologia                                
+                                       option(value="2") Marketing
+                                       option(value="3") Economia
+                                       option(value="4") Leyes
+                                       option(value="5") Literatura
+                                       option(value="6") Ciencia
+                                       option(value="7") Moda
+                                       option(value="8") Mnanualidades
+                                       option(value="9") Otra
+                                    else if Articulo[0].Clasificacion==2
+                                       option(value="1") Tecnologia                                
+                                       option(value="2" selected) Marketing
+                                       option(value="3") Economia
+                                       option(value="4") Leyes
+                                       option(value="5") Literatura
+                                       option(value="6") Ciencia
+                                       option(value="7") Moda
+                                       option(value="8") Mnanualidades
+                                       option(value="9") Otra
+                                    else if Articulo[0].Clasificacion==3
+                                       option(value="1") Tecnologia                                
+                                       option(value="2") Marketing
+                                       option(value="3" selected) Economia
+                                       option(value="4") Leyes
+                                       option(value="5") Literatura
+                                       option(value="6") Ciencia
+                                       option(value="7") Moda
+                                       option(value="8") Mnanualidades
+                                       option(value="9") Otra
+                                    else if Articulo[0].Clasificacion==4
+                                       option(value="1") Tecnologia                                
+                                       option(value="2") Marketing
+                                       option(value="3") Economia
+                                       option(value="4" selected) Leyes
+                                       option(value="5") Literatura
+                                       option(value="6") Ciencia
+                                       option(value="7") Moda
+                                       option(value="8") Mnanualidades
+                                       option(value="9") Otra
+                                    else if Articulo[0].Clasificacion==4
+                                       option(value="1") Tecnologia                                
+                                       option(value="2") Marketing
+                                       option(value="3") Economia
+                                       option(value="4" selected) Leyes
+                                       option(value="5") Literatura
+                                       option(value="6") Ciencia
+                                       option(value="7") Moda
+                                       option(value="8") Mnanualidades
+                                       option(value="9") Otra
+                                    else if Articulo[0].Clasificacion==5
+                                       option(value="1") Tecnologia                                
+                                       option(value="2") Marketing
+                                       option(value="3") Economia
+                                       option(value="4") Leyes
+                                       option(value="5" selected) Literatura
+                                       option(value="6") Ciencia
+                                       option(value="7") Moda
+                                       option(value="8") Mnanualidades
+                                       option(value="9") Otra
+                                    else if Articulo[0].Clasificacion==6
+                                       option(value="1") Tecnologia                                
+                                       option(value="2") Marketing
+                                       option(value="3") Economia
+                                       option(value="4") Leyes
+                                       option(value="5") Literatura
+                                       option(value="6" selected) Ciencia
+                                       option(value="7") Moda
+                                       option(value="8") Mnanualidades
+                                       option(value="9") Otra
+                                    else if Articulo[0].Clasificacion==7
+                                       option(value="1") Tecnologia                                
+                                       option(value="2" ) Marketing
+                                       option(value="3") Economia
+                                       option(value="4") Leyes
+                                       option(value="5") Literatura
+                                       option(value="6") Ciencia
+                                       option(value="7" selected) Moda
+                                       option(value="8") Mnanualidades
+                                       option(value="9") Otra
+                                    else if Articulo[0].Clasificacion==8
+                                       option(value="1") Tecnologia                                
+                                       option(value="2") Marketing
+                                       option(value="3") Economia
+                                       option(value="4") Leyes
+                                       option(value="5") Literatura
+                                       option(value="6") Ciencia
+                                       option(value="7") Moda
+                                       option(value="8" selected) Mnanualidades
+                                       option(value="9") Otra
+                                    else if Articulo[0].Clasificacion==9
+                                       option(value="1") Tecnologia                                
+                                       option(value="2") Marketing
+                                       option(value="3") Economia
+                                       option(value="4") Leyes
+                                       option(value="5") Literatura
+                                       option(value="6") Ciencia
+                                       option(value="7") Moda
+                                       option(value="8") Mnanualidades
+                                       option(value="9" selected) Otra
+   
+                              else
+                                 input(name="Titulo" type="text" class="form-control" placeholder="Titulo")
+                                 br
+                                 input(name="Autor" type="text" class="form-control" placeholder="Autor")
+                                 br
+                                 label Clasificacion
+                                 select(name="Clasificacion" class="form-control")
+                                    option(value="0") Seleccione
+                                    option(value="1") Tecnologia                                
+                                    option(value="2") Marketing
+                                    option(value="3") Economia
+                                    option(value="4") Leyes
+                                    option(value="6") Literatura
+                                    option(value="7") Ciencia
+                                    option(value="8") Moda
+                                    option(value="9") Mnanualidades
+                                    option(value="10") Otra
+                      br
+                      div(class="row")
+                          div(class="col-md-12")
+                              if valse && Articulo && Usuario
+                                 input(name="Descripcion" type="text" class="form-control" placeholder="Descripcion" value=    Articulo[0].Descripcion)
+                              else
+                                 input(name="Descripcion" type="text" class="form-control" placeholder="Descripcion")
+                              br
+                              div(class="col-md-1")
+                                 label Portada
+                              div(class="col-md-3")
+                                div(class="fileupload fileupload-new" data-provides="fileupload")
+                                   span(class="btn btn-default btn-file") 
+                                     span(class="fileupload-new") Examinar
+                                     span(class="fileupload-exists") Change
+                                     input(id="portada" name="portada"  type="file")
+                                   span(class="fileupload-preview margin-left")
+                                   a(id="FileNameSelect"  href="#" class="close fileupload-exists"   data-dismiss="fileupload"    style="float: none") x
+                              div(class="col-md-6")
+                              div(class="col-md-2")
+                                 a(id="btnPreview " class="btn btn-primary text-right" OnClick="mostrar();")
+                                   span(class="glyphicon glyphicon-eye-open")
+                      hr(style="color: black; background-color: black; width:100%;")
+                      if valse && Articulo && Usuario
+                        img(class="ImageUpload" src="#{Articulo[0].Portada}" id="matrix")
+                      else
+                        div(class="prevImag text-center" id="prevImag") not Image
+                        img(class="ImageUpload" src="" alt="" id="matrix")
+                      hr(style="color: black; background-color: black; width:100%;")
+                              
+   
+                      br
+                      label Cuerpo
+                      hr
+                      if valse && Articulo && Usuario
+                        textarea(name="Cuerpo"  class="form-control" placeholder="Cuerpo") #{Articulo[0].Cuerpo}
+                      else
+                        textarea(name="Cuerpo"  class="form-control" placeholder="Cuerpo") 
+                      br
+                      br
+                      div(class="form-group text-right")
+                          if valse && Articulo && Usuario
+                            button(type="submit" class="btn btn-primary ")
+                               <span class="glyphicon glyphicon-ok"></span> Update
+                          else
+                            button(type="submit" class="btn btn-primary ")
+                               <span class="glyphicon glyphicon-ok"></span> Crear                           
+   
+                          button(class="btn btn-danger")
+                             <span class="glyphicon glyphicon-remove"></span> Cancel
+          div(class="col-sm-3 col-md-1")
 
-    div(class="container")
-
-      div(class="row margin")
-
-         div(class="col-sm-3 col-md-1")
-         div(class="col-sm-6 col-md-10")
-               div(class="coment") Nuevo Articulo
-               hr(style="color: black; background-color: black; width:100%;")
-               br
-               br
-               form(method='POST', action='/articulo/save', enctype='multipart/form-data')
-                   div(class="form-group")
-                     div(class="row")
-                         div(class="col-md-6")
-                             if valse && Articulo && Usuario
-                                input(name="updateart" type="hidden" value=Articulo[0]._id)
-                                input(name="Titulo" type="text" class="form-control" placeholder="Titulo" value= Articulo[0].Titulo)
-                                br
-                                input(name="Autor" type="text" class="form-control" placeholder="Autor" readOnly="readOnly" value= Usuario[0].Nombre+" "+Usuario[0].Apellido)
-                                br
-                                label Categoria
-                                select(name="Clasificacion" class="form-control")
-                                   option(value="0" ) Seleccione
-                                   if Articulo[0].Clasificacion==1
-                                      option(value="1" selected) Tecnologia                                
-                                      option(value="2") Marketing
-                                      option(value="3") Economia
-                                      option(value="4") Leyes
-                                      option(value="5") Literatura
-                                      option(value="6") Ciencia
-                                      option(value="7") Moda
-                                      option(value="8") Mnanualidades
-                                      option(value="9") Otra
-                                   else if Articulo[0].Clasificacion==2
-                                      option(value="1") Tecnologia                                
-                                      option(value="2" selected) Marketing
-                                      option(value="3") Economia
-                                      option(value="4") Leyes
-                                      option(value="5") Literatura
-                                      option(value="6") Ciencia
-                                      option(value="7") Moda
-                                      option(value="8") Mnanualidades
-                                      option(value="9") Otra
-                                   else if Articulo[0].Clasificacion==3
-                                      option(value="1") Tecnologia                                
-                                      option(value="2") Marketing
-                                      option(value="3" selected) Economia
-                                      option(value="4") Leyes
-                                      option(value="5") Literatura
-                                      option(value="6") Ciencia
-                                      option(value="7") Moda
-                                      option(value="8") Mnanualidades
-                                      option(value="9") Otra
-                                   else if Articulo[0].Clasificacion==4
-                                      option(value="1") Tecnologia                                
-                                      option(value="2") Marketing
-                                      option(value="3") Economia
-                                      option(value="4" selected) Leyes
-                                      option(value="5") Literatura
-                                      option(value="6") Ciencia
-                                      option(value="7") Moda
-                                      option(value="8") Mnanualidades
-                                      option(value="9") Otra
-                                   else if Articulo[0].Clasificacion==4
-                                      option(value="1") Tecnologia                                
-                                      option(value="2") Marketing
-                                      option(value="3") Economia
-                                      option(value="4" selected) Leyes
-                                      option(value="5") Literatura
-                                      option(value="6") Ciencia
-                                      option(value="7") Moda
-                                      option(value="8") Mnanualidades
-                                      option(value="9") Otra
-                                   else if Articulo[0].Clasificacion==5
-                                      option(value="1") Tecnologia                                
-                                      option(value="2") Marketing
-                                      option(value="3") Economia
-                                      option(value="4") Leyes
-                                      option(value="5" selected) Literatura
-                                      option(value="6") Ciencia
-                                      option(value="7") Moda
-                                      option(value="8") Mnanualidades
-                                      option(value="9") Otra
-                                   else if Articulo[0].Clasificacion==6
-                                      option(value="1") Tecnologia                                
-                                      option(value="2") Marketing
-                                      option(value="3") Economia
-                                      option(value="4") Leyes
-                                      option(value="5") Literatura
-                                      option(value="6" selected) Ciencia
-                                      option(value="7") Moda
-                                      option(value="8") Mnanualidades
-                                      option(value="9") Otra
-                                   else if Articulo[0].Clasificacion==7
-                                      option(value="1") Tecnologia                                
-                                      option(value="2" ) Marketing
-                                      option(value="3") Economia
-                                      option(value="4") Leyes
-                                      option(value="5") Literatura
-                                      option(value="6") Ciencia
-                                      option(value="7" selected) Moda
-                                      option(value="8") Mnanualidades
-                                      option(value="9") Otra
-                                   else if Articulo[0].Clasificacion==8
-                                      option(value="1") Tecnologia                                
-                                      option(value="2") Marketing
-                                      option(value="3") Economia
-                                      option(value="4") Leyes
-                                      option(value="5") Literatura
-                                      option(value="6") Ciencia
-                                      option(value="7") Moda
-                                      option(value="8" selected) Mnanualidades
-                                      option(value="9") Otra
-                                   else if Articulo[0].Clasificacion==9
-                                      option(value="1") Tecnologia                                
-                                      option(value="2") Marketing
-                                      option(value="3") Economia
-                                      option(value="4") Leyes
-                                      option(value="5") Literatura
-                                      option(value="6") Ciencia
-                                      option(value="7") Moda
-                                      option(value="8") Mnanualidades
-                                      option(value="9" selected) Otra
-
-                             else
-                                input(name="Titulo" type="text" class="form-control" placeholder="Titulo")
-                                br
-                                input(name="Autor" type="text" class="form-control" placeholder="Autor")
-                                br
-                                label Clasificacion
-                                select(name="Clasificacion" class="form-control")
-                                   option(value="0") Seleccione
-                                   option(value="1") Tecnologia                                
-                                   option(value="2") Marketing
-                                   option(value="3") Economia
-                                   option(value="4") Leyes
-                                   option(value="6") Literatura
-                                   option(value="7") Ciencia
-                                   option(value="8") Moda
-                                   option(value="9") Mnanualidades
-                                   option(value="10") Otra
-                     br
-                     div(class="row")
-                         div(class="col-md-12")
-                             if valse && Articulo && Usuario
-                                input(name="Descripcion" type="text" class="form-control" placeholder="Descripcion" value= Articulo[0].Descripcion)
-                             else
-                                input(name="Descripcion" type="text" class="form-control" placeholder="Descripcion")
-                             br
-                             div(class="col-md-1")
-                                label Portada
-                             div(class="col-md-3")
-                               div(class="fileupload fileupload-new" data-provides="fileupload")
-                                  span(class="btn btn-default btn-file") 
-                                    span(class="fileupload-new") Examinar
-                                    span(class="fileupload-exists") Change
-                                    input(id="portada" name="portada"  type="file")
-                                  span(class="fileupload-preview margin-left")
-                                  a(id="FileNameSelect"  href="#" class="close fileupload-exists"   data-dismiss="fileupload" style="float: none") x
-                             div(class="col-md-6")
-                             div(class="col-md-2")
-                                a(id="btnPreview " class="btn btn-primary text-right" OnClick="mostrar();")
-                                  span(class="glyphicon glyphicon-eye-open")
-                     hr(style="color: black; background-color: black; width:100%;")
-                     if valse && Articulo && Usuario
-                       img(class="ImageUpload" src="#{Articulo[0].Portada}" id="matrix")
-                     else
-                       div(class="prevImag text-center" id="prevImag") not Image
-                       img(class="ImageUpload" src="" alt="" id="matrix")
-                     hr(style="color: black; background-color: black; width:100%;")
-                             
-
-                     br
-                     label Cuerpo
-                     hr
-                     if valse && Articulo && Usuario
-                       textarea(name="Cuerpo"  class="form-control" placeholder="Cuerpo") #{Articulo[0].Cuerpo}
-                     else
-                       textarea(name="Cuerpo"  class="form-control" placeholder="Cuerpo") 
-                     br
-                     br
-                     div(class="form-group text-right")
-                         if valse && Articulo && Usuario
-                           button(type="submit" class="btn btn-primary ")
-                              <span class="glyphicon glyphicon-ok"></span> Update
-                         else
-                           button(type="submit" class="btn btn-primary ")
-                              <span class="glyphicon glyphicon-ok"></span> Crear                           
-
-                         button(class="btn btn-danger")
-                            <span class="glyphicon glyphicon-remove"></span> Cancel
-         div(class="col-sm-3 col-md-1")
-
-      
+    

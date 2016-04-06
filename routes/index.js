@@ -260,7 +260,7 @@ var sessions=req.session.iduser;
            shemauser.Usuario.find({_id:sessions},function(err,User){
            var datahtml=iterahtml(coment,User,req);
          
-            res.render('articulo/design1', { title: titlePage.listall,Article: Art,Relacionados:clasif,coment: datahtml,valse:sessions,Usuario:User});
+            res.render('Usuario/viewarticulo', { title: titlePage.listall,Article: Art,Relacionados:clasif,coment: datahtml,valse:sessions,Usuario:User});
           });
          });
         }
