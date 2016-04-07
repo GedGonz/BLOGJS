@@ -254,10 +254,12 @@ router.post('/login/forget', function(req, res, next) {
       text :  "Se te olvido la Contraseña!! \n\n Descuida esta es tu nueva Contraseña: 123"  // cuerpo de texto 
    }, function (error , response) { 
       if( error ) { 
-          console.log (error); 
+          console.log (error);
+          res.render('/', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:1,message:"Hubo un problema, intentelo nuevamente!"});
       } else { 
           console.log ( "Mensaje enviado:"  + response.message ); 
-          res.render('/', { title: titlePage.LoginUp,valse:sessions,Usuario:User});
+          res.render('/', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:0,message:"Se envio su Contraseña a su Email"});
+
       } 
    });
 
@@ -328,13 +330,13 @@ var sessions=req.session.iduser;
                if(!err)
                {
                  shemauser.Usuario.find({_id:sessions},function(err,User){
-                   res.render('/', { title: titlePage.Login,valse:sessions,Usuario:User});
+                   res.render('/', { title: titlePage.Login,valse:sessions,Usuario:User,tipo:0,message:"Se actualizaron sus datos de Perfil!"});
                  });
                }
                else
                {
                  shemauser.Usuario.find({_id:sessions},function(err,User){
-                   res.render('/login/update', { title: titlePage.LoginUp,valse:sessions,Usuario:User});
+                   res.render('/login/update', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:1,message:"Hubo un problema, intentelo nuevamente!"});
                  });
                }
                  
@@ -675,7 +677,7 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
               else
               {
                      shemauser.Usuario.find({_id:idusuario},function(err,User){
-                res.render('welcome/index', { title: titlePage.count,valse:idusuario,Usuario:User,tipo:1,message:"Su Articulo no se pudo Actualizar!"});
+                res.render('articulo/new', { title: titlePage.articlenew,valse:idusuario ,Usuario:User,tipo:1,message:"Su Articulo no se pudo Actualizar!"});
                });
               }
                 
@@ -700,7 +702,7 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
         else
         {
                shemauser.Usuario.find({_id:idusuario},function(err,User){
-          res.render('welcome/index', { title: titlePage.count,valse:idusuario,Usuario:User,tipo:1,message:"Su Articulo no se pudo Crear!"});
+          res.render('articulo/new', { title: titlePage.articlenew,valse:idusuario ,Usuario:User,tipo:1,message:"Su Articulo no se pudo Crear!"});
          });
         }
           

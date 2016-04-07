@@ -20,7 +20,11 @@ block content
    div(class="container")
 
       div(class="row margin")
-         
+         if message
+            if tipo<1
+               div(class="alert alert-success text-center" role="alert") #{message}
+            else
+               div(class="alert alert-danger text-center" role="alert") #{message}
          div(class="col-sm-3 col-md-4")
          div(class="col-sm-6 col-md-4")
             div(class="titulologin text-center")
