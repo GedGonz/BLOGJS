@@ -29,7 +29,7 @@ var titlePage=
   adminuser:"Admin User"
 }
 
-function sendMails(usuario,codverif,Destinatario) {
+function sendMailsVerify(usuario,codverif,Destinatario) {
   smtpTransport.sendMail({ 
       from:  "BLOGJS < InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
       to:  Destinatario,  // lista separada por comas de los receptores 
@@ -45,6 +45,22 @@ function sendMails(usuario,codverif,Destinatario) {
    });
 }
 
+function sendMailsforget(email,Passworduser) {
+             smtpTransport.sendMail({ 
+                from :  "BLOGJS <InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
+                to :  email,  // lista separada por comas de los receptores 
+                subject :  "Hola " ,  // línea de asunto 
+                text :  "<img src='http://res.cloudinary.com/gedgonz/image/upload/c_scale,w_28/v1459537935/OC-Blog_pqzh4t.png'> <span style='color:#00A1E0;'>BLOG<span style='color:#9CCB3B;'>JS</span></span></h1>\n\n Se te olvido la Contraseña!! \n\n Descuida esta es tu Contraseña: "+Passworduser  // cuerpo de texto 
+             }, function (error , response) { 
+                if( error ) { 
+                    console.log (error);
+                      return false;
+                } else { 
+                    console.log ( "Mensaje enviado:"  + response.message ); 
+                    return true;
+                } 
+             });
+}
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
      var tipo=file.mimetype;
@@ -245,23 +261,20 @@ router.post('/login/count', function(req, res, next) {
 router.post('/login/forget', function(req, res, next) {
    var sessions=req.session.iduser; 
   /******************************/
-   //Envio de Correo
+   //Envio de Correo 
+       shemauser.Usuario.find({Email:req.body.email},function(err,User){
+            if(sendMailsforget(req.body.email,User[0].Password))
+            {
+              res.render('/login/forget', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:1,message:"Hubo un problema, intentelo nuevamente!"});
+            }
+            else
+            {
+            res.render('/login/forget', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:0,message:"Se envio la Contraseña a su Email"});
+            }
 
-   smtpTransport.sendMail({ 
-      from :  "BLOGJS < InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
-      to :  req.body.email,  // lista separada por comas de los receptores 
-      subject :  "Hola " ,  // línea de asunto 
-      text :  "Se te olvido la Contraseña!! \n\n Descuida esta es tu nueva Contraseña: 123"  // cuerpo de texto 
-   }, function (error , response) { 
-      if( error ) { 
-          console.log (error);
-          res.render('/', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:1,message:"Hubo un problema, intentelo nuevamente!"});
-      } else { 
-          console.log ( "Mensaje enviado:"  + response.message ); 
-          res.render('/', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:0,message:"Se envio su Contraseña a su Email"});
 
-      } 
-   });
+        });
+
 
   /*******************************/
   res.render('welcome/prueba');
@@ -355,7 +368,7 @@ var sessions=req.session.iduser;
          var usuario=req.body.nombre+" "+req.body.apellido;
          var codverif=Usuariodata[0]._id;
          var email="gedgonz7@gmail.com";
-        sendMails(usuario,codverif,email);
+        sendMailsVerify(usuario,codverif,email);
 
         /*******************************/
         shemauser.Usuario.find({_id:sessions},function(err,User){
