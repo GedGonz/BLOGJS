@@ -7,7 +7,8 @@ var mongoose= require('../config/mongoose');
   	Email:String,
   	Usuario:String,
   	Password:String,
-  	Photo:String
+  	Photo:String,
+    Estado:Number
 
   }
 

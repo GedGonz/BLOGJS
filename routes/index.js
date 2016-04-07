@@ -29,6 +29,21 @@ var titlePage=
   adminuser:"Admin User"
 }
 
+function sendMails(usuario,codverif,Destinatario) {
+  smtpTransport.sendMail({ 
+      from:  "BLOGJS < InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
+      to:  "gedgonz7@gmail.com",  // lista separada por comas de los receptores 
+      subject:  "Hola " ,  // línea de asunto 
+      text:  "Bienvenido a BLOGJS!!",  // cuerpo de texto #
+      html:  "<h1>Bienvenido "+usuario+" a <img src='http://res.cloudinary.com/gedgonz/image/upload/c_scale,w_28/v1459537935/OC-Blog_pqzh4t.png'> <span style='color:#00A1E0;'>BLOG<span style='color:#9CCB3B;'>JS</span></span></h1> \n <p1>Entre a este enlace para activar su cuenta: localhost:5000/user/activacion/"+codverif+" </p>"  // cuerpo de texto 
+   }, function (error , response) { 
+      if( error ) { 
+          console.log (error); 
+      } else { 
+          console.log ( "Mensaje enviado:"  + response.message ); 
+      } 
+   });
+}
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
@@ -95,6 +110,7 @@ function getFecha(Art,meses) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
       var sessions=req.session.iduser;
 
       if(sessions)
@@ -124,6 +140,31 @@ router.get('/login', function(req, res, next) {
           shemauser.Usuario.find({_id:sessions},function(err,User){
             res.render('usuario/login', { title: titlePage.Login,valse:sessions,User:User});
           });
+});
+
+//Ruta de Activacion
+router.get('/user/activacion/:activacion', function(req, res, next) {
+
+
+  var idactivado=req.params.activacion;
+
+      var sessions=req.session.iduser;
+      console.log(sessions);
+    shemauser.Usuario.find({_id:idactivado},function(err,User){
+      console.log(User);
+      User[0].Estado=1;
+      User[0].save(function(err)
+      {
+        if(!err)
+        {
+          console.log("render");
+          res.render('usuario/login', { title: titlePage.Login,valse:sessions,Usuario:User});
+        }
+      });
+            
+     });
+  
+
 });
 
 //Ruta de Logout
@@ -250,15 +291,17 @@ var sessions=req.session.iduser;
   var data={
 	  Nombre:req.body.nombre,
   	Apellido:req.body.apellido,
+    Estado:0,
     Email:req.body.email,
   	Usuario:req.body.usuario.toLowerCase(),
   	Password:req.body.pasword.toLowerCase(),
     Photo:result.url //"../../images/Photo.jpg" /*Falta Cargar la Foto desde el controlador*/
   }
   var valupdate=req.body.updateuser;
+  var Usuariodata=new shemauser.Usuario(data);
   if(valupdate)
    {
-       var Usuariodata=new shemauser.Usuario(data);
+       
        shemauser.Usuario.find({_id:idusuario},function(err,User){
           User[0].Nombre=req.body.nombre;
           User[0].Apellido=req.body.apellido;
@@ -269,7 +312,7 @@ var sessions=req.session.iduser;
             {
               User[0].Photo=req.body.nombre;
             }
-            Usuariodata.save(function(err)
+            User[0].save(function(err)
               {
                if(!err)
                {
@@ -296,19 +339,8 @@ var sessions=req.session.iduser;
      	{
          /******************************/
          //Envio de Correo
-
-         smtpTransport.sendMail({ 
-            from :  "BLOGJS < InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
-            to :  req.body.email,  // lista separada por comas de los receptores 
-            subject :  "Hola " ,  // línea de asunto 
-            text :  "Bienvenido a BLOGJS!!"  // cuerpo de texto 
-         }, function (error , response) { 
-            if( error ) { 
-                console.log (error); 
-            } else { 
-                console.log ( "Mensaje enviado:"  + response.message ); 
-            } 
-         });
+         var usuario=req.body.nombre+" "+req.body.apellido;
+        sendMails(usuario,sessions);
 
         /*******************************/
         shemauser.Usuario.find({_id:sessions},function(err,User){
