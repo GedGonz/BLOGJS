@@ -47,16 +47,14 @@ block content
        | }
     div(class="container marginleft")
        div(class="row margin")
-   
+          if message
+             if tipo<1
+                div(class="alert alert-success text-center" role="alert") #{message}
+             else
+                div(class="alert alert-danger text-center" role="alert") #{message}
           div(class="col-sm-3 col-md-1")
           div(class="col-sm-6 col-md-10")
-                if valse && Articulo && Usuario
-                   div(class="coment") Actualizar Articulo
-                else
-                   div(class="coment") Nuevo Articulo
-                hr(style="color: black; background-color: black; width:100%;")
-                br
-                br
+  
                 form(method='POST', action='/articulo/save', enctype='multipart/form-data')
                     div(class="form-group")
                       div(class="row")

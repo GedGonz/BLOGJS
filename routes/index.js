@@ -32,7 +32,7 @@ var titlePage=
 function sendMails(usuario,codverif,Destinatario) {
   smtpTransport.sendMail({ 
       from:  "BLOGJS < InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
-      to:  "gedgonz7@gmail.com",  // lista separada por comas de los receptores 
+      to:  Destinatario,  // lista separada por comas de los receptores 
       subject:  "Hola " ,  // línea de asunto 
       text:  "Bienvenido a BLOGJS!!",  // cuerpo de texto #
       html:  "<h1>Bienvenido "+usuario+" a <img src='http://res.cloudinary.com/gedgonz/image/upload/c_scale,w_28/v1459537935/OC-Blog_pqzh4t.png'> <span style='color:#00A1E0;'>BLOG<span style='color:#9CCB3B;'>JS</span></span></h1> \n <p1>Entre a este enlace para activar su cuenta: localhost:5000/user/activacion/"+codverif+" </p>"  // cuerpo de texto 
@@ -195,29 +195,40 @@ router.post('/login/count', function(req, res, next) {
      if(usuario.length!=0)
      {
 
-     	//console.log(usuario);
-     req.session.iduser=usuario[0]._id;
-     var sessions=req.session.iduser; 
-     var iduser=req.session.iduser;
-     if(sessions)
-      {
-       
-      shemarticulo.Articulo.find({Usuario:iduser,Estado:0},function(err,Art) {
+        if(usuario[0].Estado==1)
+        {
+            
+         	//console.log(usuario);
+         req.session.iduser=usuario[0]._id;
+         var sessions=req.session.iduser; 
+         var iduser=req.session.iduser;
+         if(sessions)
+          {
+           
+          shemarticulo.Articulo.find({Usuario:iduser,Estado:0},function(err,Art) {
 
-        shemauser.Usuario.find({_id:iduser},function(err,User){
-          getFecha(Art,meses);
-            res.render('articulo/listall', { title: titlePage.count,Articulos:Art,valse:sessions,Usuario:User});
-          });
-      });
-     	 
-      }
-      else
-       {
-          shemauser.Usuario.find({_id:iduser},function(err,User){
+            shemauser.Usuario.find({_id:iduser},function(err,User){
               getFecha(Art,meses);
-            res.render('/', { title: titlePage.count,valse:sessions,User:User});
+                res.render('articulo/listall', { title: titlePage.count,Articulos:Art,valse:sessions,Usuario:User});
+              });
           });
-       }
+         	 
+          }
+          else
+           {
+              shemauser.Usuario.find({_id:iduser},function(err,User){
+                  getFecha(Art,meses);
+                res.render('/', { title: titlePage.count,valse:sessions,User:User});
+              });
+           }
+        }
+        else
+        {
+          console.log(usuario[0].Estado);
+            shemauser.Usuario.find({_id:sessions},function(err,User){
+            res.render('usuario/login', { title: titlePage.Login,valse:sessions,User:User,message:"Usuario no Activado! Revice su email de confirmacion y Confirme su Registro "});
+          });
+        }
      }
      else{
           shemauser.Usuario.find({_id:sessions},function(err,User){
@@ -340,7 +351,9 @@ var sessions=req.session.iduser;
          /******************************/
          //Envio de Correo
          var usuario=req.body.nombre+" "+req.body.apellido;
-        sendMails(usuario,sessions);
+         var codverif=Usuariodata[0]._id;
+         var email="gedgonz7@gmail.com";
+        sendMails(usuario,codverif,email);
 
         /*******************************/
         shemauser.Usuario.find({_id:sessions},function(err,User){
@@ -655,14 +668,14 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
               //console.log(Articulodata);
                    shemauser.Usuario.find({_id:idusuario},function(err,User){
 
-                res.render('articulo/new', { title: titlePage.articlenew,valse:idusuario ,Usuario:User});
+                res.render('articulo/new', { title: titlePage.articlenew,valse:idusuario ,Usuario:User,tipo:0,message:"Su Articulo se Actualizo Correctamente!"});
                });
 
               }
               else
               {
                      shemauser.Usuario.find({_id:idusuario},function(err,User){
-                res.render('welcome/index', { title: titlePage.count,valse:idusuario,Usuario:User});
+                res.render('welcome/index', { title: titlePage.count,valse:idusuario,Usuario:User,tipo:1,message:"Su Articulo no se pudo Actualizar!"});
                });
               }
                 
@@ -679,7 +692,7 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
         //console.log(Articulodata);
           shemauser.Usuario.find({_id:idusuario},function(err,User){
 
-          res.render('articulo/new', { title: titlePage.articlenew,valse:idusuario ,Usuario:User});
+          res.render('articulo/new', { title: titlePage.articlenew,valse:idusuario ,Usuario:User,tipo:0,message:"Su Articulo se creo Correctamente!"});
 
          });
 
@@ -687,7 +700,7 @@ router.post('/articulo/save',multer({ storage : storage}).single('portada'), fun
         else
         {
                shemauser.Usuario.find({_id:idusuario},function(err,User){
-          res.render('welcome/index', { title: titlePage.count,valse:idusuario,Usuario:User});
+          res.render('welcome/index', { title: titlePage.count,valse:idusuario,Usuario:User,tipo:1,message:"Su Articulo no se pudo Crear!"});
          });
         }
           
