@@ -1,9 +1,9 @@
 var cloudinary = require('cloudinary');
 
 cloudinary.config({ 
-  cloud_name: 'gedgonz', 
-  api_key: '817862158519284', 
-  api_secret: 'Yi7Usj78XdZhcpnHzwquG9fvt3E' 
+  cloud_name: 'yourname', 
+  api_key: 'yourapikey', 
+  api_secret: 'yourapisecret' 
 });
 
 module.exports=cloudinary
