@@ -3,9 +3,9 @@ logs
 *.log
 npm-debug.log*
 # Modulos
-node_modules/
+node_modules
 # Config
-config/
+config
 
 # Runtime data
 pids
