@@ -33,7 +33,7 @@ function sendMailsVerify(usuario,codverif,Destinatario) {
   smtpTransport.sendMail({ 
       from:  "BLOGJS < InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
       to:  Destinatario,  // lista separada por comas de los receptores 
-      subject:  "Hola " ,  // línea de asunto 
+      subject:  "Correo de Verificacion" ,  // línea de asunto 
       text:  "Bienvenido a BLOGJS!!",  // cuerpo de texto #
       html:  "<h1>Bienvenido "+usuario+" a <img src='http://res.cloudinary.com/gedgonz/image/upload/c_scale,w_28/v1459537935/OC-Blog_pqzh4t.png'> <span style='color:#00A1E0;'>BLOG<span style='color:#9CCB3B;'>JS</span></span></h1> \n <p1>Entre a este enlace para activar su cuenta: localhost:5000/user/activacion/"+codverif+" </p>"  // cuerpo de texto 
    }, function (error , response) { 
@@ -49,8 +49,9 @@ function sendMailsforget(email,Passworduser) {
              smtpTransport.sendMail({ 
                 from :  "BLOGJS <InformatiJS@BLOGJS.com>" ,  // dirección del remitente 
                 to :  email,  // lista separada por comas de los receptores 
-                subject :  "Hola " ,  // línea de asunto 
-                text :  "<img src='http://res.cloudinary.com/gedgonz/image/upload/c_scale,w_28/v1459537935/OC-Blog_pqzh4t.png'> <span style='color:#00A1E0;'>BLOG<span style='color:#9CCB3B;'>JS</span></span></h1>\n\n Se te olvido la Contraseña!! \n\n Descuida esta es tu Contraseña: "+Passworduser  // cuerpo de texto 
+                subject :  "Recuperacion Password " ,  // línea de asunto
+                text:  "Olvido la Contraseña BLOGJS!!",  // cuerpo de texto #
+                html :  "<h1><img src='http://res.cloudinary.com/gedgonz/image/upload/c_scale,w_28/v1459537935/OC-Blog_pqzh4t.png'> <span style='color:#00A1E0;'>BLOG<span style='color:#9CCB3B;'>JS</span></span></h1> \n Se te olvido la Contraseña!! \n\n Descuida esta es tu Contraseña: "+Passworduser  // cuerpo de texto 
              }, function (error , response) { 
                 if( error ) { 
                     console.log (error);
@@ -265,19 +266,16 @@ router.post('/login/forget', function(req, res, next) {
        shemauser.Usuario.find({Email:req.body.email},function(err,User){
             if(sendMailsforget(req.body.email,User[0].Password))
             {
-              res.render('/login/forget', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:1,message:"Hubo un problema, intentelo nuevamente!"});
+              res.render('usuario/forget', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:1,message:"Hubo un problema, intentelo nuevamente!"});
             }
             else
             {
-            res.render('/login/forget', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:0,message:"Se envio la Contraseña a su Email"});
+            res.render('usuario/forget', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:0,message:"Se envio la Contraseña a su Email"});
             }
 
 
         });
 
-
-  /*******************************/
-  res.render('welcome/prueba');
 });
 
 //Ruta de LoginUp
@@ -314,21 +312,23 @@ var datass="./public/uploads/"+nameimage.originalname;
 var sessions=req.session.iduser; 
 
  cloudinary.uploader.upload(datass, function(result) { 
+  console.log(result.url);
   var data={
 	  Nombre:req.body.nombre,
   	Apellido:req.body.apellido,
-    Estado:0,
     Email:req.body.email,
   	Usuario:req.body.usuario.toLowerCase(),
   	Password:req.body.pasword.toLowerCase(),
-    Photo:result.url //"../../images/Photo.jpg" /*Falta Cargar la Foto desde el controlador*/
+    Photo:result.url, //"../../images/Photo.jpg" /*Falta Cargar la Foto desde el controlador*/
+    Estado:0
   }
-  var valupdate=req.body.updateuser;
+  var valupdate=req.body.updatuser;
   var Usuariodata=new shemauser.Usuario(data);
+  console.log('Entra en Update'+valupdate);
   if(valupdate)
    {
        
-       shemauser.Usuario.find({_id:idusuario},function(err,User){
+       shemauser.Usuario.find({_id:valupdate},function(err,User){
           User[0].Nombre=req.body.nombre;
           User[0].Apellido=req.body.apellido;
           User[0].Email=req.body.email;
@@ -336,20 +336,20 @@ var sessions=req.session.iduser;
           User[0].Password=req.body.pasword.toLowerCase();
           if(result.url)
             {
-              User[0].Photo=req.body.nombre;
+              User[0].Photo=result.url;
             }
             User[0].save(function(err)
               {
                if(!err)
                {
                  shemauser.Usuario.find({_id:sessions},function(err,User){
-                   res.render('/', { title: titlePage.Login,valse:sessions,Usuario:User,tipo:0,message:"Se actualizaron sus datos de Perfil!"});
+                   res.render('usuario/update', { title: titlePage.Login,valse:sessions,Usuario:User,tipo:0,message:"Se actualizaron sus datos de Perfil!"});
                  });
                }
                else
                {
                  shemauser.Usuario.find({_id:sessions},function(err,User){
-                   res.render('/login/update', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:1,message:"Hubo un problema, intentelo nuevamente!"});
+                   res.render('usuario/update', { title: titlePage.LoginUp,valse:sessions,Usuario:User,tipo:1,message:"Hubo un problema, intentelo nuevamente!"});
                  });
                }
                  
@@ -366,9 +366,10 @@ var sessions=req.session.iduser;
          /******************************/
          //Envio de Correo
          var usuario=req.body.nombre+" "+req.body.apellido;
-         var codverif=Usuariodata[0]._id;
+
+         var codverif=Usuariodata._id;
          var email="gedgonz7@gmail.com";
-        sendMailsVerify(usuario,codverif,email);
+         sendMailsVerify(usuario,codverif,email);
 
         /*******************************/
         shemauser.Usuario.find({_id:sessions},function(err,User){
@@ -383,7 +384,7 @@ var sessions=req.session.iduser;
      	}
      		
      });
-}
+   }
 });
   
 });
@@ -410,7 +411,7 @@ var sessions=req.session.iduser;
            shemauser.Usuario.find({_id:sessions},function(err,User){
            var datahtml=iterahtml(coment,User,req);
          
-            res.render('Usuario/viewarticulo', { title: titlePage.listall,Article: Art,Relacionados:clasif,coment: datahtml,valse:sessions,Usuario:User});
+            res.render('usuario/viewarticulo', { title: titlePage.listall,Article: Art,Relacionados:clasif,coment: datahtml,valse:sessions,Usuario:User});
           });
          });
         }
