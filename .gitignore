@@ -8,7 +8,7 @@ npm-debug.log*
 /node_modules
 # Config
 
-/config
+config
 /node_modules
 .env
 /idea
