@@ -5,12 +5,15 @@ npm-debug.log*
 
 # Modulos
 
-node_modules
+/node_modules
 # Config
 
-config
-
-
+/config
+/node_modules
+.env
+/idea
+/bin
+Procfile
 # Runtime data
 pids
 *.pid
