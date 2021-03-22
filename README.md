@@ -11,5 +11,3 @@ SIstema de Gestion de Articulos
 + Mongoose <br>
  Dependencia en NodeJS para conectar Mongodb.
  
-# WebSite
-http://blogsjs.herokuapp.com/
