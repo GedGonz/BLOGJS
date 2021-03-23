@@ -116,8 +116,11 @@ html
      block content
   div(class="footer")
       br
-      p(style="text-align:center; margin-top:1em;") Copyright © 2016 by Ged Gonz 
+      p(style="text-align:center; margin-top:1em;") Copyright © 2016 - <span id="anio"></span> by GedGonz 
          br
          span(style="text-align:  center; margin-top:0.5em;") BLOGJS
-      br
-      p(style="text-align:center; margin-top:2em;")
+  script.
+      $(document).ready(function() {
+      var anio = new Date().getFullYear();
+      $("#anio").text(anio);
+      });
